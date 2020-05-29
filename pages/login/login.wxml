@@ -1,0 +1,27 @@
+<view class="flex_1 flex_f margin_40 padding_20">
+  <view style="height: 230rpx" class="width_100 flex_sc">
+    <image src="../../images/me_logo@2x.png" alt="" style="width: 356rpx;height:166rpx"></image>
+  </view>
+  <view class="c-3 f-28">手机号快捷登录</view>
+  <view class="login-input flex_a">
+    <image src="../../images/tel@1x.png" alt="" style="width: 22rpx;height:38rpx"></image>
+    <input value="{{phone}}" type="number" class="input-box" maxlength="11" placeholder="请输入手机号码" bindinput="checkPhone"></input>
+    <icon type="clear" size="16" color="#999999" wx:if="{{phone !== ''}}" bindtap='clearPhone' />
+  </view>
+  <view class="flex_a" style="height: 70px">
+    <view class="my_checkbox_g">
+      <checkbox-group bindchange="clickCheckBox">
+        <checkbox value="{{checkBox.name}}" checked="{{checkBox.checked}}" />
+      </checkbox-group>
+
+    </view>
+    <navigator url="/pages/userAgreement/userAgreement">
+      <text class="f-24">登录即表示同意</text><text class="f-24 f_b margin_l_20 t_u">28快运用户协议</text>
+    </navigator>
+  </view>
+<navigator url="">
+  <view class="button-g flex f_w" style="opacity:{{(phone.length > 0 && checkBox.checked)?'1':'0.5'}}" bindtap="next">
+    下一步
+  </view>
+  </navigator>
+</view>

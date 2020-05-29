@@ -1,0 +1,69 @@
+<view class="height_100 flex_f b_t">
+
+  <view class="flex_1 b_f5">
+    <view class="padding_20_40 c-3 f-28">基本服务</view>
+    <view class="content flex_sb">
+      <view class="request-button flex" data-item='{{item}}' data-index="{{index}}" bindtap="requestClick" wx:for="{{requestList}}" wx:key="{{index}}" style="border-color:{{(item.selected)?'#2fb301':'#c0c4cc'}}">
+        <view class="flex_f flex_a">
+          <view class="f-24 {{(item.selected)?'f_g':'c-3'}}">{{item.extraName}}</view>
+          <view class="f-20 {{(item.selected)?'f_g':'c-9'}}">{{item.remark === ''? '（免费）':'￥(' + item.remark + ')' }}</view>
+        </view>
+
+      </view>
+
+    </view>
+
+    <view class="padding_20_40 f-20">
+      <view class="c-3 margin_t_40">
+        <view class="circle"></view>电子回单详细说明
+      </view>
+      <view class="c-9 info-2">
+        司机将会在收到回执后进行拍照上传，您可在对应的订单详情页查看回执单照片。
+      </view>
+
+      <view class="c-3 margin_t_40">
+        <view class="circle"></view>需要装卸详细说明
+      </view>
+      <view class="c-9 info-2">
+        装卸服务包括装货、卸货以及搬运服务，该服务的内容和费用需要您与司机自行协商。
+      </view>
+
+      <view class="c-3 margin_t_40">
+        <view class="circle"></view>需要回单详细说明
+      </view>
+      <view class="c-9 info-2">
+        司机最晚在服务完成后第二天18点之前将回执单送回始发地（不包括回程带人、带货）。
+      </view>
+
+      <view class="c-3 margin_t_40">
+        <view class="circle"></view>需要回款详细说明
+      </view>
+      <view class="c-9 info-2">
+        司机最晚在服务完成后第二天18点之前将货款送回始发地（不包括回程带人、带货）。
+      </view>
+    </view>
+  </view>
+
+  <view class="success " bindtap="successSubmit">
+    <view class="success-button  flex f_w">
+      确认
+    </view>
+  </view>
+  <view class="{{showMask?'mask2':''}}" bindtap="closeMask2"></view>
+
+
+  <!--弹窗-->
+  <view wx:if="{{dialogFormVisible}}" class="mask2-window ">
+    <view class="padding_l_20 padding_r_20">
+      <view class="margin_t_20 c-3 f-28">司机需带回</view>
+      <view class="margin_t_20 margin_b_20 tip-input flex_a">
+        <input type="number" class="my-input margin_l_20" value="{{money}}" bindinput="changeMoney" placeholder="输入金额（元）" />
+      </view>
+    </view>
+    <view class="b_b"></view>
+    <view class="flex_a" style="height: 40px;">
+      <view class="flex_1 flex height_100" style="border-right: 1px solid #DCDBDC" bindtap="closeMask2">取消</view>
+      <view class="flex_1 f_g flex height_100" bindtap="submitMoney">确定</view>
+    </view>
+  </view>
+</view>

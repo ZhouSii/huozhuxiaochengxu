@@ -1,0 +1,352 @@
+<!-- 顶部 -->
+<view class="flex_a padding_b_20">
+  <view class="flex_1 flex_a">
+    <image mode='aspectFit' class="navi_bar_img padding_l_20" src="../../images/home_nav_per.png" bindtap='toggleLeft'></image>
+  </view>
+  <view class="sendType flex_a">
+    <block wx:for="{{tabType}}" wx:key="{{index}}">
+      <view class="flex_1 pointer height_100 {{ (tabTypeId === item.id) ? 'bkgfocus' : '' }}" data-id="{{item.id}}" bindtap="changeSendType">
+        <view class="f-28 height_100 flex {{(tabTypeId === item.id)?'f_w':'f_g'}}">{{item.name}}</view>
+      </view>
+    </block>
+  </view>
+  <view class="flex_1"></view>
+</view>
+
+<view class="flex_1 flex_f" hidden="{{tabTypeId !== 0}}">
+  <view>
+    <!-- 顶部选择车型（文字） -->
+    <view class="row2 padding_l_20 flex_a">
+      <navigator url="/pages/chooseCity/chooseCity" class="flex_a" id="cityName">
+        <view class='f-28' style="max-width: 70px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden">
+          {{form._cityAdcode.length !== 0?form._cityAdcode[0]:'定位中...'}}
+        </view>
+        <i-icon size="16" type="unfold" />
+      </navigator>
+      <scroll-view class='height_100' style='width: calc(100% - {{cityNameWidth}}px)' scroll-x="true" scroll-with-animation="true" id="carTypeItem" scroll-left="{{scrollLeft}}">
+        <view class="f-28 flex_1 height_100 p_r carType">
+          <block wx:for="{{carList}}" wx:key="{{index}}">
+            <text class="carType-item flex {{(form.carType===item.carType)?'f_g':''}}" data-i="{{index}}" data-item="{{item}}" bindtap='selectCarType'>{{item.list[0].carTypeName}}</text>
+          </block>
+          <view class="slider" animation='{{animationData}}' style='left:{{form.carTypeItemLeft}}px;width:{{form.carTypeItemWidth}}px'></view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+
+  <view class="flex_1 wk-touch o_f">
+    <scroll-view id="scroll" class='height_100 b_f5' scroll-y="true" scroll-top="{{scrollTop}}" scroll-with-animation="true">
+      <!-- 车型轮播图 -->
+      <view class="p_r padding_t_40 b_c_w">
+        <swiper current="{{form.initialIndex}}" class="swiper" bindchange="changeCarTypePicHandler">
+          <block wx:for="{{carList}}" wx:key="{{index}}">
+            <swiper-item class="flex">
+              <image mode='aspectFit' src="{{item.list[0].servicePic}}" class="slide-image" />
+              <view class="f-24 c-9 margin_l_20" wx:if="{{item1.carType === form.carType}}" wx:for="{{carList}}" wx:for-item="item1" wx:key="{{index1}}">
+                <view class="flex_a">
+                  <view class='flex_sb slide-image-letter'>
+                    <text>载</text>
+                    <text>重</text>
+                  </view>:
+                  <text class='margin_l_20'>{{item1.list[0].capacityTon.toString().indexOf('.')=== -1?item1.list[0].capacityTon + '.0':item1.list[0].capacityTon}}吨
+    </text>
+                </view>
+                <view class="flex_a">
+                  <view class='flex_sb slide-image-letter'>
+                    <text>长</text>
+                    <text>宽</text>
+                    <text>高</text>
+                  </view>:
+                  <text class='margin_l_20'>{{item1.list[0].carLength}}*{{item1.list[0].carWidth}}*{{item1.list[0].carHeight}}米</text>
+                </view>
+                <view class="flex_a">
+                  <view class='flex_sb slide-image-letter'>
+                    <text>载</text>
+                    <text>货</text>
+                    <text>体</text>
+                    <text>积</text>
+                  </view>:
+                  <text class='margin_l_20'>{{item1.list[0].capacitySquare.toString().indexOf('.')=== -1?item1.list[0].capacitySquare + '.0':item1.list[0].capacitySquare}}方</text>
+                </view>
+              </view>
+            </swiper-item>
+          </block>
+        </swiper>
+        <i-icon class="swiper-dot-left" wx:if="{{form.initialIndex>0}}" bindtap="changeCarTypePicHandler2" data-dir="left" type="return" size="16" />
+        <i-icon class="swiper-dot-right" wx:if="{{carList?form.initialIndex<(carList.length-1):''}}" bindtap="changeCarTypePicHandler2" data-dir="right" type="enter" size="16" />
+      </view>
+      <!-- 车型规格 -->
+      <!-- <view class="padding_20 f-24 flex_sa" wx:if="{{item.carType === form.carType}}" wx:for="{{carList}}" wx:key="{{index}}">
+      <view class='flex_f flex'>
+        <text class="c-3 f-32">{{item.list[0].capacityTon.toString().indexOf('.')=== -1?item.list[0].capacityTon + '.0':item.list[0].capacityTon}}吨
+    </text>
+        <text class="c-9">载重</text>
+      </view>
+
+      <view class='flex_f flex'>
+        <text class="c-3 f-32">{{item.list[0].carLength}}*{{item.list[0].carWidth}}*{{item.list[0].carHeight}}米</text>
+        <text class="c-9">长·宽·高</text>
+      </view>
+      <view class='flex_f flex'>
+        <text class="c-3 f-32">{{item.list[0].capacitySquare.toString().indexOf('.')=== -1?item.list[0].capacitySquare + '.0':item.list[0].capacitySquare}}方</text>
+        <text class="c-9">载货体积</text>
+      </view>
+    </view> -->
+      <!-- <view style='height:3rpx;' class='b_f5'></view> -->
+
+      <!-- 车型要求 -->
+      <view class='b_c_w' style='padding: 20rpx 30rpx;'>
+        <view class='f-28 c-9'>车型要求（选填）</view>
+        <view class="f-28 flex_a f_f" wx:if="{{item.carType === form.carType}}" wx:for="{{carList}}" wx:key="{{index}}" wx:for-index="i">
+          <view class="spec-box margin_t_20 c-3" wx:for="{{item.list[0].specName}}" wx:for-item="item1" wx:key="{{index1}}">
+            <view data-item='{{item}}' data-item1='{{item1}}' data-i='{{i}}' bindtap="specClick" class="spec-button flex_a">
+              <image mode='aspectFit' src="../../images/duihao@2x.png" class='circle' wx:if="{{item1 === item.specNameSelected}}"></image>
+              <image mode='aspectFit' src="../../images/Oval@2x.png" class='circle' wx:else></image>
+              {{item1}}
+            </view>
+
+          </view>
+        </view>
+      </view>
+      <!-- 地址 -->
+      <view class=" b_f5 padding_t_20 ">
+        <view class="f-28 c-3 flex_a flex_jfe route" bindtap="toRouteManage">
+          常用路线
+          <i-icon data-dir="right" type="enter" size="16" class='c-9' />
+        </view>
+        <view class="addressTopDiv ">
+          <block wx:for="{{form.to}}" wx:key="{{index}}">
+            <view class="flex_a">
+              <view class="dotCont flex p_r" data-i='{{index}}' bindtap="updateAddressList">
+                <view class="{{(index===0)?'greendot':''}}"></view>
+                <view wx:if="{{index === 1}}" style='transform: rotate(45deg)'>
+                  <i-icon type="delete_fill" class="c-9" size="22" />
+                </view>
+                <i-icon wx:if="{{index>1}}" type="offline_fill" class="c-9" size="22" />
+                <view wx:if="{{index !== 0}}" class="line"></view>
+              </view>
+
+              <view class="flex_1 line-item margin_l_20 flex_a" data-item='{{item}}' bindtap="toShowMap">
+                <view wx:if="{{item.originName !== ''}}">
+                  <view class="addressDetail c-3 f-28">{{item.originName}}</view>
+                  <view class="addressDetail c-9 f-24">{{item.origin}} {{item.addressDetail ? item.addressDetail: ''}}</view>
+                </view>
+                <view class="c-9" wx:else>
+                  <view wx:if="{{index === 0}}">
+                    请输入发货地址
+                  </view>
+                  <view wx:else>
+                    请输入收货地址
+                  </view>
+                </view>
+
+              </view>
+              <view class='line-item-r flex' data-i='{{index}}' bindtap="openWindow">
+                <image mode='aspectFit' src='../../images/renlanai@2x.png' style='width:28rpx;height:34rpx'></image>
+              </view>
+
+
+            </view>
+          </block>
+        </view>
+      </view>
+    </scroll-view>
+
+  </view>
+
+  <!-- 底部 -->
+  <view class="padding_20 b_f5 f_w">
+    <view class="p_r b_c_w" style="height: 160rpx;border-radius: 8rpx;">
+      <view style="height: 50px;border-bottom: 2rpx solid #f5f5f5;font-size: 28rpx">
+        <view style="color: #666;white-space: nowrap;padding:26rpx 20rpx;">
+          <view class="flex" style="height: 60rpx" bindtap="toFareEstimate">
+            <text>约</text>
+            <text class="f_g">￥</text>
+            <text class="f_g f-44">{{form.mathPriceList._totalAmount}}</text>
+            <i-icon type="enter" size="26" />
+          </view>
+          <navigator url="">
+            <view class="youhui pointer f-24 f_r" bindtap="toPreferential">
+              更多优惠
+            </view>
+          </navigator>
+        </view>
+      </view>
+
+      <view class="flex f_r f-24" style="height: 54rpx">
+        <text bindtap='test'>已减免{{form.mathPriceList.orderDiscountAmount + form.mathPriceList.reward}}元</text>
+      </view>
+
+    </view>
+
+    <view class="flex_r footer">
+      <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" bindcancel="timeCancel" value="{{multiIndex}}" range="{{multiArray}}" range-key="{{'name'}}" class='btn pointer footer-left f-32'>
+        <navigator url="">
+          <view bindtap='getTime' class='flex footer-left-text'>
+            <i-icon type="time" size="22" />
+            <text class="margin_l_20 f_w">预约</text>
+          </view>
+        </navigator>
+      </picker>
+      <navigator url="" class="btn footer-right flex pointer" bindtap="toUseCarNow">
+        实时用车
+      </navigator>
+    </view>
+  </view>
+</view>
+
+<view class="flex_1 flex_f" hidden="{{tabTypeId !== 1}}">
+  <view class="title flex_a">
+    <view class="c-3 f-32">请输入地址信息</view>
+  </view>
+  <view class="flex_1 b_f5 padding_t_20">
+    <view class="addressTopDiv ">
+      <block wx:for="{{faWuLiuForm.to}}" wx:key="{{index}}">
+        <view class="flex_a">
+          <view class="dotCont flex p_r">
+            <view class="{{(index===0)?'greendot':''}} {{(index + 1 ===  faWuLiuForm.to.length)?'reddot':''}}"></view>
+            <view wx:if="{{index !== 0}}" class="line"></view>
+          </view>
+
+          <view class="flex_1 line-item flex_a" data-item="{{item}}" bindtap="toShowMap">
+            <view wx:if="{{item.originName !== ''}}">
+              <view class="addressDetail c-3 f-28">{{item.originName}}</view>
+              <view class="addressDetail c-9 f-24">{{item.origin}}</view>
+            </view>
+            <view class="margin_l_20 c-9" wx:else>
+              <view wx:if="{{index === 0}}">
+                请输入发货地址
+              </view>
+              <view wx:else>
+                请输入收货地址
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class="info b_c_w margin_t_20">
+      <view class="c-3 f-32 margin_b_20">
+        请输入货物信息
+      </view>
+      <view class="flex_sb info-item">
+        <view class="flex_1 flex_a">
+          <text class="c-3 f-28 margin_r_20">货物类型</text>
+          <view class="goods-selected flex_sb" bindtap="showBottomWindowHandle">
+            <text class="f-28 flex_1 flex {{faWuLiuForm.goodsName? 'c-3' : 'c-9'}}">{{faWuLiuForm.goodsName ? faWuLiuForm.goodsName : '(必填)'}}</text>
+            <i-icon type="enter" class="cubeic-arrow f-28 c-9"/>
+          </view>
+        </view>
+        <view class="flex_1 margin_l_20 flex_a">
+          <text class="c-3 f-28 margin_r_20">总件数</text>
+          <input placeholder="1-1000" class="fa_input f-28" type="number" value="{{faWuLiuForm.number}}" bindinput="bindinputNumber" bindblur="bindblurNumber" />
+          <text class="c-3 f-28 margin_l_20">件</text>
+        </view>
+      </view>
+      <view class="flex_sb info-item">
+        <view class="flex_1">
+          <text class="c-3 f-28 margin_r_20">总重量</text>
+          <!-- <input placeholder="1-1000" class="fa_input" type="number" v-model="faWuLiuForm.weight" @focus="inputFocus" @input="(e)=>{_formatNumber(e, 0,faWuLiuForm,'weight', false)}" @blur="(e)=>{
+                   checkPoint(faWuLiuForm,'weight',e)
+                    inputBlur(e)
+                    blur()
+                   }"> -->
+          <text class="c-3 f-28 margin_l_20">公斤</text>
+        </view>
+        <view class="flex_1 margin_l_20">
+          <text class="c-3 f-28 margin_r_20">总体积</text>
+          <!-- <input placeholder="1-1000" class="fa_input" type="number" v-model="faWuLiuForm.volume" @focus="inputFocus" @input="(e)=>{_formatNumber(e, 2,faWuLiuForm,'volume', true)}" @blur="(e)=>{
+                   checkPoint(faWuLiuForm,'volume',e)
+                   inputBlur(e)
+                   blur()
+                   }"> -->
+          <text class="c-3 f-28 margin_l_20">立方</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="padding_20 b_f5 f_w">
+    <view class="p_r b_c_w youhui_h">
+      <view class="youhui_body">
+        <view class="youhui_body_item">
+          <view class="flex youhui_body_item_h">
+            <view class="flex_es">
+              <view>预估</view>
+              <view class="f_g">￥</view>
+              <view class="f_g f-44">{{faWuLiuForm.estimatePrice + faWuLiuForm.reductionPrice}}</view>
+              <view>元</view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="flex f_r f-24 youhui_body_item_h2">
+        <view>已减免{{Math.abs(faWuLiuForm.reductionPrice)}}元，限APP现付运费</view>
+      </view>
+
+    </view>
+
+    <view class="footer flex pointer f-32" bindtap="toFaWuLiuNext">
+      下一步
+    </view>
+  </view>
+</view>
+
+<!-- 地址详情弹窗 -->
+<import src="../../template/addressDetailWindow/addressDetailWindow" />
+<template is="addressDetailWindow" data="{{addr:form.to,showWindow,checkedSms,showSms,i}}" />
+
+<i-drawer mode="left" visible="{{showLiftWindow}}" bind:close="toggleLeft">
+  <view class="left-module" style='width:{{windowWidth / 2}}px;height:{{windowHeight}}px'>
+    <view style="height: 160px" class="flex_f flex_a">
+
+      <view wx:if="{{userInfo}}">
+        <image mode='aspectFit' wx:if="{{userInfo.shipperCardFile===''|| userInfo.shipperCardFile === null }}" class="circle b_f5 margin_t_40" src="../../images/wodesj_tx_def@2x.png" alt=""></image>
+        <image mode='aspectFit' wx:else class="circle b_f5 margin_t_40" src="{{userInfo.shipperCardFile}}" alt=""></image>
+      </view>
+      <image mode='aspectFit' wx:else class="circle b_f5 margin_t_40" src="../../images/wodesj_tx_def@2x.png" alt=""></image>
+      <navigator wx:if="{{!userInfo}}" url="/pages/login/login">
+        <view class="f-24 c-3 margin_t_40">
+          立即登录
+        </view>
+      </navigator>
+      <view wx:else class="f-24 c-3 margin_t_40">
+        {{userInfo?userInfo.mobile:''}}
+      </view>
+    </view>
+    <navigator url="">
+      <view class="left-module-item f-28 c-3 flex_a" bindtap="toOrderManage">
+        <image mode='aspectFit' src="../../images/me_ddjl.png" style='width:18px;height:22px;'></image>
+        订单记录
+      </view>
+    </navigator>
+    <navigator url="/pages/chargeStandard/chargeStandard?city={{form._cityAdcode[0]}}&adcode={{form._cityAdcode[1]}}">
+      <view class="left-module-item f-28 c-3 flex_a">
+        <image mode='aspectFit' src="../../images/me_yhxy.png" style='width:18px;height:22px;'></image>
+        收费标准
+      </view>
+    </navigator>
+
+    <navigator url="/pages/userAgreement/userAgreement">
+      <view class="left-module-item f-28 c-3 flex_a">
+        <image mode='aspectFit' src="../../images/me_siji@2x.png" style='width:18px;height:20px;'></image>
+        用户协议
+      </view>
+    </navigator>
+
+    <navigator url="/pages/serviceCenter/serviceCenter">
+      <view class="left-module-item f-28 c-3 flex_a">
+        <image mode='aspectFit' src="../../images/me_kefu@2x.png" style='width:18px;height:20px;'></image>
+        客服中心
+      </view>
+    </navigator>
+
+    <navigator url="">
+      <view class="left-module-item f-28 c-3 flex_a" bindtap="toMoreSet">
+        <image src="../../images/me_setting@2x.png" style='width:18px;height:20px;'></image>
+        更多设置
+      </view>
+    </navigator>
+  </view>
+</i-drawer>

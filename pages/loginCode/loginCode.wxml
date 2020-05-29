@@ -1,0 +1,22 @@
+<view class="flex_1 flex_f margin_40 padding_20">
+  <view style="height: 230rpx" class="width_100 flex_sc">
+    <image src="../../images/me_logo@2x.png" alt="" style="width: 356rpx;height:166rpx"></image>
+  </view>
+  <view class="c-3 f-28">
+    短信验证码已发送至{{phone}}，请注意查收
+  </view>
+  <view class="login-input flex_a">
+<view class='flex_sb flex_1 margin_r_20'>
+<input type="number" value='{{code}}' class="input-box" maxlength="6" placeholder="验证码" bindinput="checkCode"></input>
+   
+    <icon type="clear" size="16" color="#999999" wx:if="{{code !== ''}}" bindtap='clearCode' />
+</view>
+    
+    <view class="get-code flex f_w f-24" bindtap="getCode" style="background:{{canClick?'#999999 ':'#2fb301'}}">{{timeName}}</view>
+
+  </view>
+  <view class="button-g flex f_w margin_t_40" style="opacity:{{code !== ''?'1':'0.5'}}" bindtap="next">
+    登录
+  </view>
+
+</view>

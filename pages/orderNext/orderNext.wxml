@@ -1,0 +1,255 @@
+<view class="height_100 flex_f f-28 b_t">
+  <view>
+    <view class="order-item flex_a b_b b_c_w">
+      <view class="order-item-l c-9">用车时间</view>
+      <view class="flex_sb c-3 flex_1">
+        <text>{{form.time === ''?'现在':form.time}}</text>
+        <view class="tip  f-24 {{formNext.tipName?'f_r':'c-9'}}" bindtap="tip" style="border-color:{{formNext.tipName?'#ff300d':'#DCDBDC'}}">加小费</view>
+      </view>
+    </view>
+
+    <view class="order-item flex_a b_b b_c_w">
+      <view class="order-item-l c-9">服务车型</view>
+      <view class="flex_sb c-3 flex_1">
+        <text wx:for="{{carList}}" wx:key="{{index}}" wx:if="{{item.carType === form.carType}}">{{item.carTypeName}}</text>
+        <i-icon type="packup" wx:if="{{!showAddress}}" bindtap="showAddressOn" />
+      </view>
+    </view>
+
+    <view wx:if="{{showAddress}}">
+      <view class="order-item flex_a b_b" wx:for="{{form.to}}" wx:key="{{index}}">
+        <view class="order-item-l c-9" wx:if="{{index === 0}}">始发地</view>
+        <view class="order-item-l c-9" wx:if="{{index > 0 && index + 1 !== form.to.length}}">途经地</view>
+        <view class="order-item-l c-9" wx:if="{{index > 0 && index + 1 === form.to.length}}">目的地</view>
+        <view class="flex_sb c-3 flex_1">
+          <text>{{item.originName}}</text>
+          <i-icon type="unfold" wx:if="{{index > 0 && index + 1 === form.to.length}}" bindtap="showAddressOff" />
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="flex_1 b_f5 flex_f">
+    <view class="flex_1 margin_t_20">
+      <view class="order-item1 flex_sb b_b b_c_w">
+        <view class="order-item-l c-9 flex_a">
+          <image src="../../images/ddqr_huowumc@3x.png" style="width: 22px;height:21px"></image>
+          <view class="margin_l_20 c-3">货物名称</view>
+        </view>
+        <view class="flex_sb flex_1">
+          <view class="flex_1 flex margin_l_20" bindtap="goods">
+            <view class="f-24 order-item1-select {{formNext.goodsName === ''?'c-9':'c-3'}}">{{formNext.goodsName === ''?'(选填)':formNext.goodsName}}</view>
+          </view>
+          <view class="flex_1 margin_l_20 flex_a" bindtap="weight">
+            <view class="f-24 order-item1-select flex_1 {{formNext.weightName === ''?'c-9':'c-3'}}">{{formNext.weightName === ''?'(选填)':formNext.weightName}}</view>吨
+          </view>
+          <view class="flex_1 margin_l_20 flex_a" bindtap="volume">
+            <view class="f-24 order-item1-select flex_1 {{formNext.volumeName === ''?'c-9':'c-3'}}">{{formNext.volumeName === ''?'(选填)':formNext.volumeName}}</view>方
+          </view>
+        </view>
+      </view>
+
+      <view class="order-item1 flex_sb b_b b_c_w">
+        <view class="order-item-l c-9 flex_a">
+          <image src="../../images/ddqr_siji@3x.png" alt="" style="width: 20px;height:22px"></image>
+          <view class="margin_l_20 c-3">我的司机优先接单</view>
+        </view>
+        <switch checked="{{formNext.isFirst}}" bindchange="switch1Change" />
+      </view>
+
+      <navigator class="order-item1 flex_sb b_b b_c_w" url="/pages/requestList/requestList?serviceCode={{form.serviceCode}}">
+        <view class="order-item-l c-9 flex_a">
+          <image src="../../images/ddqr_extra@3x.png" alt="" style="width: 20px;height:20px"></image>
+          <view class="margin_l_20 c-3" style="margin-right: 30px">额外服务</view>
+        </view>
+
+        <view class="c-9 flex_1 flex_ce">
+          <view class="request-name {{formNext.extraServiceDtoList.length === 0?'c-9':'c-3'}}">
+            {{formNext.extraServiceDtoList.length === 0 ? '需要装卸(与司机议价)':requestNameListShow}}
+          </view>
+          <i-icon type="enter" />
+        </view>
+
+      </navigator>
+
+      <navigator class="order-item1 flex_sb  b_c_w" url="/pages/remark/remark">
+        <view class="order-item-l c-9 flex_a">
+          <image src="../../images/ddqr_messiage@3x.png" alt="" style="width: 20px;height:20px"></image>
+          <view class="margin_l_20 c-3" style="margin-right: 30px">给司机捎句话</view>
+        </view>
+        <view class="c-9 flex_1 flex_ce">
+          <view class="request-name {{formNext.remark.length === 0?'c-9':'c-3'}}">
+            {{formNext.remark.length === 0 ?'货物类型、特殊情况':formNext.remark}}
+          </view>
+          <i-icon type="enter" />
+        </view>
+      </navigator>
+
+      <view class="order-item1"></view>
+    </view>
+
+    <view class="footer b_c_w flex_a width_100">
+      <view class="flex_1 flex_sb margin_l_20 margin_r_20">
+
+        <view wx:if="{{formNext.tipName === ''}}" class="f-24 c-3">预估价：
+          <text class="f_r f-32">{{form.mathPriceList._totalAmount}}.00</text>元</view>
+        <view wx:else>
+          <view class="f-24 c-3">总价：
+            <text class="f_r f-32">{{form.mathPriceList._totalAmount * 1 + formNext.tipName*1}}.00</text>元</view>
+          <view class="f-20 f_b">预估价{{form.mathPriceList._totalAmount}}.00 + 小费{{formNext.tipName}}.00</view>
+        </view>
+
+        <view class="f-20 c-9 flex_a" bindtap="showBottomWindow">明细
+          <i-icon type="packup" />
+        </view>
+      </view>
+      <view class="footer-right b_c_g flex f_w f-32 height_100" bindtap="pay">立即下单</view>
+    </view>
+  </view>
+
+  <view class="{{showMask?'mask2':''}}" animation='{{animationData}}' bindtap="closeMask2"></view>
+  <!--小费弹窗-->
+  <view wx:if="{{tipWindow}}" class="mask2-window" animation='{{animationData}}'>
+    <view class="padding_l_20 padding_r_20">
+      <view class="margin_t_20 c-3 f-28">提示：优惠券不能抵扣小费费用</view>
+      <view class="flex_sb margin_l_20 margin_r_20 margin_t_20">
+        <view class=" tip-button flex" wx:for="{{tipList}}" wx:key="{{index}}" data-item="{{item}}" bindtap="selectedTip">
+          {{item.name}}
+        </view>
+      </view>
+
+      <view class="margin_20 tip-input flex_a">
+        <input type="number" class="my-input margin_l_20" value='{{tipForm.inputTip}}' bindinput="checkTip" placeholder="其他金额，请在此输入（最高200元）" />
+      </view>
+    </view>
+
+    <view class="flex_a b_t" style="height: 40px;">
+      <view class="flex_1 flex height_100" style="border-right: 1px solid #DCDBDC" bindtap="closeMask2">取消</view>
+      <view class="flex_1 f_g flex height_100" bindtap="submitTip">确定</view>
+    </view>
+  </view>
+  <!--货物弹窗-->
+  <view wx:if="{{goodsWindow}}" class="mask2-window padding_20" animation='{{animationData}}'>
+    <view class="flex_a f_f">
+      <view class="goods-button" wx:for="{{goodsList}}" wx:key="{{index}}" data-item='{{item}}' bindtap="selectedGoods">
+        <text class="goods-button-item c-3 f-24 flex">{{item.name}}</text>
+      </view>
+    </view>
+    <view class="flex_a">
+      <view class="tip-input flex_1 flex_a">
+        <input class="my-input margin_l_20" value="{{inputGoods}}" maxlength="10" bindinput="checkGoods" placeholder="手动输入货物名称" />
+      </view>
+      <view class="goods-submit flex margin_l_20" bindtap="goodsSubmit">确定</view>
+    </view>
+  </view>
+
+  <!--重量弹窗-->
+  <view wx:if="{{weightWindow}}" class="mask2-window padding_20" animation='{{animationData}}'>
+    <view class="flex_a f_f">
+      <view class="goods-button" wx:for="{{weightList}}" wx:key="{{index}}" data-item='{{item}}' bindtap="selectedWeight">
+        <text class="goods-button-item c-3 f-24 flex">{{item.name}}</text>
+      </view>
+    </view>
+    <view class="flex_a">
+      <view class="tip-input flex_1 flex_a">
+        <input type="digit" maxlength="6" class="my-input margin_l_20" bindinput="checkWeight" placeholder="手动输入重量（单位：吨）" />
+      </view>
+      <view class="goods-submit flex margin_l_20" bindtap="weightSubmit">确定</view>
+    </view>
+  </view>
+
+  <!--体积弹窗-->
+  <view wx:if="{{volumeWindow}}" class="mask2-window padding_20" animation='{{animationData}}'>
+    <view class="flex_a f_f">
+      <view class=" goods-button " wx:for="{{volumeList}}" wx:key="{{index}}" data-item='{{item}}' bindtap="selectedVolume">
+        <text class="goods-button-item c-3 f-24 flex">{{item.name}}</text>
+      </view>
+    </view>
+    <view class="flex_a">
+      <view class="tip-input flex_1 flex_a">
+        <input type="digit" class="my-input margin_l_20" bindinput="checkVolume" placeholder="手动输入体积（单位：方）" />
+      </view>
+      <view class="goods-submit flex margin_l_20" bindtap="volumeSubmit">确定</view>
+    </view>
+  </view>
+
+  <view class="module o_f b_c_w width_100" animation='{{animationDataBottom}}'>
+    <view class="info-item b_b flex_sb">
+      <view>预计行驶</view>
+      <view>{{form.mathPriceList.distance}}公里</view>
+    </view>
+    <view class="info-item b_b flex_sb">
+      <view>起步价(含
+        <text>{{form.mathPriceList.kmPrice}}</text>公里)</view>
+      <view>{{form.mathPriceList.price}}元</view>
+    </view>
+    <view class="info-item b_b flex_sb">
+      <view>超里程费(超出
+        <text>{{form.mathPriceList.outDistance}}</text>公里)</view>
+      <view>{{form.mathPriceList.outstripPrice}}元</view>
+    </view>
+    <view class="info-item b_b flex_sb">
+      <view>多途径地服务费(
+        <text>{{form.mathPriceList.moreAddr}}</text>个)</view>
+      <view>{{form.mathPriceList.moreAddr * form.mathPriceList.moreAddrPrice}}元</view>
+    </view>
+    <view class="info-item b_b flex_sb">
+      <view>小费</view>
+      <view>{{form.tipName?form.tipName + '.0':'0'}}元</view>
+    </view>
+    <view class="info-item b_b flex_sb lemonchiffon">
+      <view class="f_gg">在线交易优惠</view>
+      <view>
+        <text class="f_r">{{form.mathPriceList.reward}}</text>元</view>
+    </view>
+    <view class="info-item b_b flex_sb lemonchiffon" bindtap="toPreferential">
+      <view class="f_gg">优惠券抵扣</view>
+      <view>
+        <text class="f_r">{{form.mathPriceList.orderDiscountAmount}}</text>元
+        <i-icon type="enter" />
+      </view>
+    </view>
+    <view class="info-item c-9 f-20 margin_t_20">
+      注：实际价格将根据实际里程、等候时间计算收费。预估价格仅作为当前规划里程线进行的预估值。
+    </view>
+    <view class="info-item"></view>
+  </view>
+
+  <view class="{{showBottomWindow?'mask':''}}" bindtap="closeBottomWindow" animation='{{animationData}}'></view>
+</view>
+
+<view class="{{showPayWindow?'mask':''}}" bindtap="closePayWindow" animation='{{animationDataPay}}'></view>
+<view class="pay-module b_c_w width_100" animation='{{animationDataBottomPay}}'>
+  <i-icon type="close" size="20" class="iconfont icon-icon_close f_g padding_l_40" bindtap="closePayWindow" />
+  <view style="text-align: center" class="b_b">￥
+    <text class="f-44 c-3">{{form.mathPriceList._totalAmount * 1 + formNext.tipName*1}}.0</text>
+  </view>
+  <view class="o_f pay_h">
+    <view class="pay-item flex_sb b_b" bindtap="showpayShowList">
+      <view class="f-32 c-3 flex_a">
+        <image mode='aspectFit' src="../../images/ddqr_paynow@3x.png" class="ddqr_paynow"></image>
+        <text class="margin_l_20">马上付款</text>
+      </view>
+      <i-icon type="unfold" class="iconfont icon-xiala c-9" />
+    </view>
+    <view class="b_f5" wx:if="{{payShowList[0].show}}">
+      <view class="flex_sb pay-online">
+        <view class="flex_a" bindtap="selectPay('wx')">
+          <image mode='aspectFit' src="../../images/ddqr_wechat@3x.png" class="ddqr_paynow"></image>
+          <view class="margin_l_20">
+            <view class="f-28 c-3">微信支付</view>
+            <view class="f-20 c-9">搬运等额外费用可在司机装货后支付</view>
+          </view>
+        </view>
+        <!-- <cube-radio
+              :option="{label: '',value: 'wx'}"
+              v-model="selected4">
+            </cube-radio> -->
+      </view>
+    </view>
+  </view>
+  <view class="b_f5 flex_r pay_type_h">
+    <view class="pay-button flex f_w" bindtap="next">
+      {{(selected4 === 'zh' || selected4 === 'sh')?'去叫车':'去支付'}}
+    </view>
+  </view>
+</view>

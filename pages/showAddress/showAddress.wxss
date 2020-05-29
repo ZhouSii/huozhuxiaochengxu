@@ -1,0 +1,24 @@
+ page{
+   height: 100%
+ }
+  .b{
+    background-color: #F5F5F5;
+  }
+
+  .address-item{
+    background: white;
+    height: 100rpx;
+  }
+  .address-item text {
+    font-size: 32rpx
+  }
+  .address-item image{
+    margin: 0 40rpx;
+  }
+
+  .submit{
+    height: 120rpx;
+    background-color: #2fb301;
+    border-radius: 10rpx;
+    margin: 20rpx;
+  }

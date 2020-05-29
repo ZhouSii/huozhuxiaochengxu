@@ -1,0 +1,111 @@
+<view class="height_100 flex_f">
+  <view class='nav b_c_w' style='height:{{navH}}px'>
+    <view class='nav-title flex_a'>
+      <view class="flex_1 flex_a">
+        <image src='../../../images/back@2x.png' mode='aspectFit' class='back' bindtap='navBack'></image> 
+      </view>
+      <view class="flex_3 flex f-36 f_w_b c-4 ">
+        <view class="flex" bindtap="clickTitle">{{title}}订单</view>
+        <image animation='{{animationRotate}}' src='../../../images/orderManage/triangle@2x.png' mode='aspectFit' class='triangle margin_l_15'></image> 
+      </view>
+      <view class="flex_1"></view>
+      
+    </view>
+  </view>
+  <view class="tab flex_a p_r">
+    <view class="flex_1 flex f-28 tab-item" wx:for="{{categoryData}}" wx:key="index" bindtap='selectTabItem' data-i="{{index}}" data-item="{{item}}" >
+      <view class="{{categoryCur === item.id? 'f_g' : 'c-7'}}">
+        {{item.name}}
+      </view>
+    </view>
+    <view class="slider" animation='{{animationData}}'></view>
+  </view>
+
+ 
+    <swiper current="{{categoryCur}}" class="flex_1 content" bindchange="bindchange">
+    <swiper-item wx:for="{{categoryData}}" wx:key="index">
+      <scroll 
+      requesting="{{item.requesting}}"
+      end="{{item.end}}"
+				empty-show="{{item.emptyShow}}"
+				list-count="{{item.listData.length}}"
+				top-size="{{0}}"
+				bind:refresh="refresh"
+				bind:more="more">
+          <view class="content_item"  wx:for="{{item.listData}}"
+						  wx:key="index" data-item="{{item}}"
+							bindtap="clickItem">
+             <view class="flex_sb top">
+                <view class="flex_a" >
+                  <view class="time margin_r_40 flex f-20 f_g">
+                    实时
+                  </view>
+                  <view class=" f-24 c-9">
+                    2019-09-09 08:59
+                  </view>
+                </view>
+                <view class="f-28 f_44">
+                 待支付
+               </view>               
+             </view>
+            <view class="divide"></view>
+            <view class="body">
+              <view class="flex_a margin_b_10">
+                <view class="l_w_60 flex">
+                  <view class="greendot2"></view>
+                </view>
+                <view class="c-4 f-28 m_l_30">
+                  丰兴广场
+                </view>
+              </view>
+              <view class="flex_sb margin_b_20">
+                <view class="flex_a">
+                  <view class="l_w_60 flex">
+                     <view class="reddot2"></view>
+                  </view>
+                  <view class="c-4 f-28 m_l_30">
+                    零健身工作室
+                  </view>
+                </view>
+                <text class="c-3"><text class="f-28">30.00</text><text class="f-20">元</text></text>
+              </view>
+
+              <view class="flex_sb" >
+                <view class="flex_a">
+                   <view class="l_w_60 flex">
+                         <image class="select" src="../../../images/orderManage/no_selected@2x.png"></image>
+                   </view>
+                  <view class="cricle margin_r_10"></view>
+                  <view class="f-24 c-7">
+                    王司机·小面包
+                  </view>
+                </view>
+                <image class="phone" src="../../../images/orderManage/phone@2x.png"></image>
+              </view>
+            </view>
+            <view class="divide"></view>
+            <view class="footer flex_ce f-24">
+              <view class="button_a9 margin_l_20 flex c-7">
+                <view class="margin_l_15 margin_r_15">
+                  取消订单
+                </view>    
+                
+              </view>
+              <view class="button_g margin_l_20 flex f_g">
+                  <view class="margin_l_15 margin_r_15">
+                  去支付
+                </view>  
+                
+              </view>
+              <view class="button_g margin_l_20 flex f_g">
+                  <view class="margin_l_15 margin_r_15">
+                  支付额外费用
+                </view>  
+              </view>
+            </view>
+          </view>
+      </scroll>
+    </swiper-item>
+    </swiper>
+ 
+</view>

@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "i-icon": "../../../dist/icon/index",
+    "xiaoHuoCheOrder": "../../../components/xiaoHuoCheOrder/xiaoHuoCheOrder"
+  },
+  "navigationBarTitleText": "确认定单"
+}

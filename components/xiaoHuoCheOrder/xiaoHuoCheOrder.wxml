@@ -1,0 +1,169 @@
+<view class="margin_b_20">
+	<view class="order_body" style="border-top-left-radius: {{tabTypeId === 1 ? '16rpx' : 0}}">
+		<view class="row2 padding_l_20 padding_r_20">
+			<scroll-view class='height_100' scroll-x="true" scroll-with-animation="true" id="carTypeItem" scroll-left="{{scrollLeft}}">
+				<view class="f-28 flex_1 height_100 carType flex_a">
+					<view wx:for="{{form.carList}}" wx:key="index" class="carType-item flex f-28 {{form.carType===item.carType?'f_w':'c-7'}} {{form.carType===item.carType?'carType-selected':''}}" bindtap="selectCarType" data-item="{{item}}" data-index="{{index}}">
+						{{item.list[0].carTypeName}}
+					</view>
+				</view>
+			</scroll-view>
+		</view>
+		<view class="p_r">
+			<swiper current="{{form.initialIndex}}" class="swiper" bindchange="changeCarTypePicHandler">
+				<block wx:for="{{form.carList}}" wx:key="index">
+					<swiper-item class="flex">
+						<image class="car_width" mode="aspectFit" src="{{item.list[0].servicePic}}" bindtap="test"></image>
+						<view class="c-9 f-24 margin_l_20 flex_f flex_js car-item">
+							<view class="flex_a">
+								<view class="flex_sb"><text>载</text><text>重</text></view>:
+								{{item.list[0].capacityTon}}吨
+							</view>
+							<view class="flex_a">
+								<view class="flex_sb"><text>长</text><text>宽</text><text>高</text></view>:
+								{{item.list[0].carLength}}*{{item.list[0].carWidth}}*{{item.list[0].carHeight}}米
+							</view>
+							<view class="flex_a">
+								<view class="flex_sb"><text>载</text><text>货</text><text>体</text><text>积</text></view>:
+								{{item.list[0].capacitySquare}}方
+							</view>
+						</view>
+					</swiper-item>
+				</block>
+			</swiper>
+			<i-icon class="swiper-dot-left" wx:if="{{form.initialIndex>0}}" bindtap="changeCarTypePicHandler2" data-dir="left" type="return" size="16" />
+			<i-icon class="swiper-dot-right" wx:if="{{form.initialIndex<form.carList.length-1}}" bindtap="changeCarTypePicHandler2" data-dir="right" type="enter" size="16" />
+		</view>
+		<view class="time-type margin_t_20 flex_a">
+			<view wx:for="{{timeType}}" wx:key="index" class="pointer height_100 padding_l_20 padding_r_20 {{form._timeId===item.id?'bkgfocus':''}}" bindtap="changeTime" data-id="{{item.id}}">
+				<view class="f-28 height_100 flex {{form._timeId===item.id?'f_g f_w_b':'c-7'}}" wx:if="{{form.time === ''}}">{{item.name}}</view>
+				<view class="f-28 height_100 flex {{form._timeId===item.id?'f_g f_w_b':'c-7'}}" wx:else>{{item.id === 0 ? '现在' : form._time}}</view>
+			</view>
+		</view>
+		<view class="flex_1 b_f5 wk-touch">
+			<view class="addressTopDiv2">
+				<view class="flex_a">
+					<view class="dotCont flex p_r">
+						<view class="greendot2"></view>
+					</view>
+					<view class="flex_1 line-item2 flex_a">
+						<view class="flex_1" bindtap="toShowMap" data-item="{{form.to[0]}}">
+							<view wx:if="{{form.to[0].originName !== ''}}">
+								<view class="addressDetail2 c-3 f-28">{{form.to[0].originName}} {{form.to[0].addressDetail}}</view>
+								<view class="addressDetail2 c-9 f-24">{{form.to[0].origin}}</view>
+							</view>
+							<view wx:else class="margin_l_20 c-9 f-32">
+								您从哪儿出发
+							</view>
+						</view>
+						<view bindtap="showWindow" data-item="{{form.to[0]}}">
+							<image src="../../images/order2.0/fahuo@2x.png" alt="" class="img_map"></image>
+						</view>
+					</view>
+				</view>
+				<view class="margin_l_30" style="border-bottom : 2rpx solid #E6E6E6"></view>
+
+				<view wx:for="{{form.to}}" wx:key="index" wx:if="{{index > 0}}">
+					<view class="flex_a">
+						<view class="dotCont flex p_r">
+							<view wx:if="{{index === 1}}">
+								<view wx:if="{{form.to.length === 2}}" class="reddot2"></view>
+								<i-icon type="close" wx:else bindtap="updateAddressList" data-index="{{index}}" />
+							</view>
+							<i-icon type="close" wx:if="{{index > 1}}" class="cubeic-close" bindtap="updateAddressList" data-index="{{index}}" />
+						</view>
+
+						<view class="flex_1 line-item2 flex_a">
+							<view class="flex_1" bindtap="toShowMap" data-item="{{item}}">
+								<view wx:if="{{item.originName !== ''}}">
+									<view class="addressDetail2 c-3 f-28">{{item.originName}} {{item.addressDetail}}</view>
+									<view class="addressDetail2 c-9 f-24">{{item.origin}}</view>
+								</view>
+								<view wx:else class="margin_l_20 c-9 f-32">
+									您要送去哪儿
+								</view>
+							</view>
+							<view bindtap="showWindow" data-item="{{item}}" class="p_r">
+								<image src="../../images/order2.0/suohuo@2x.png" alt="" class="img_map"></image>
+								<image src="../../images/order2.0/drag@2x.png" alt="" class="img_drag" wx:if="{{form.to.length > 2}}"></image>
+								<view class="img_tips" wx:if="{{index === 1 && showXiaoHuoCheTips === true}}">
+									<image class="img_tips_1" src="../../images/order2.0/tips@2x.png"></image>
+									<view class="title f_w f-24" catchtap="setTips">
+										支持长按拖拽调整顺序哦！
+										<i-icon type="close" />
+									</view>
+								</view>
+
+							</view>
+						</view>
+					</view>
+					<view class="margin_l_30" :style="{'border-bottom': form.to.length !== index + 1 ? '2px solid #E6E6E6' : ''}"></view>
+				</view>
+			</view>
+		</view>
+
+		<view class="btn flex f-24 c-7" bindtap="addAddressList">
+			添加目的地
+		</view>
+
+	</view>
+</view>
+
+
+<view class='window p_r' wx:if="{{showAddressWindow}}" animation='{{animationData}}'>
+	<view class="flex_a window_top">
+		<view class="flex_1"></view>
+		<view class='f-32 c-4 flex'>{{addr.shipperSort === 0 ? '发' : '收'}}货人信息</view>
+		<view class="flex_1 c-7 f-24 flex_jfe margin_r_30"></view>
+	</view>
+
+	<view class='flex_sb item' bindtap='toShowMap' data-item="{{addr}}">
+		<view class='flex_a'>
+			<image wx:if='{{addr.shipperSort === 0}}' src='../../images/order2.0/start@2x.png' class="img1" />
+			<image wx:else src='../../images/order2.0/end@2x.png' class="img1" />
+			<view class='c-3 f-28 margin_l_20'>{{addr.originName}}</view>
+		</view>
+		<i-icon type="enter" size="18" color="#777777" />
+	</view>
+	<view class="divide"></view>
+
+	<view class='flex_a item'>
+		<image src='../../images/order2.0/address@2x.png' class="img2" />
+		<input value="{{addr.addressDetail}}" bindinput="setAddressDetail" class="c-4 f-28 margin_l_20 flex_1" placeholder="详细地址如门牌号（可不填）" />
+	</view>
+	<view class="divide"></view>
+	<view class='flex_a item'>
+		<image src='../../images/order2.0/name@2x.png' class="img2" alt="" />
+		<input value="{{addr.consignee}}" bindinput="setConsignee" class="c-4 f-28 margin_l_20 flex_1" placeholder="{{addr.shipperSort === 0 ? '发货人姓名（可不填）' : '收货人姓名（可不填）'}}" />
+	</view>
+	<view class="divide"></view>
+	<view class='flex_a item'>
+		<image src='../../images/order2.0/phone@2x.png' class="img2" alt="" />
+		<input value="{{addr.consigneeMobile}}" bindinput="setConsigneeMobile" type="number" class="c-4 f-28 margin_l_20 flex_1" placeholder="联系人电话（可不填）" />
+	</view>
+	<view class='button flex f_w f-36' bindtap="submitWindow">确定</view>
+	<image class='close' bindtap='closeAddressWindow' src='../../images/Combined_Shape@2x.png' />
+</view>
+<view class="{{showAddressWindow?'mask':''}}" animation='{{animationData}}'></view>
+
+
+<view class="bottomWindow b_c_w width_100" animation='{{animationDataBottom}}'>
+  <view class="flex_sb title">
+		<view class="c-4 f-36 f_w_b">请选择预约时间</view>
+		<i-icon type="close" bindtap="closeBottomWindow"/>
+	</view>
+	<picker-view indicator-style="height: 100rpx;" style="width: 100%; height: 540rpx;" value="{{multiIndex}}" bindchange="bindChange">
+		<picker-view-column>
+			<view wx:for="{{day}}" wx:key="index" class="flex" style="line-height: 100rpx">{{item.name}}</view>
+		</picker-view-column>
+		<picker-view-column>
+			<view wx:for="{{hour}}" wx:key="index" class="flex" style="line-height: 100rpx">{{item.name}}</view>
+		</picker-view-column>
+		<picker-view-column>
+			<view wx:for="{{minute}}" wx:key="index" class="flex" style="line-height: 100rpx">{{item.name}}</view>
+		</picker-view-column>		
+	</picker-view>
+
+	<view class="f_w f-36 f_w_b button flex" bindtap="timeOk">确定</view>
+</view>
+<view class="{{showBottomWindow?'mask':''}}" bindtap="closeBottomWindow" animation='{{animationData}}'></view>

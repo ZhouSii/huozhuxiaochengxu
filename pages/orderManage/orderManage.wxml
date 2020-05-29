@@ -1,0 +1,35 @@
+<view class="height_100 flex_f f-28">
+  <view class="flex_a">
+    <view wx:if="{{from === 'order'}}" class="flex_1 h3_mg30">
+      <view class="indent_h3" wx:if="{{tableData !== ''}}">您有
+        <text class="h3_color">{{tableData.length}}</text>个服务中的订单</view>
+    </view>
+    <view wx:else class="flex_1 h3_mg30">
+      <view class="indent_h3 h3_color">下单成功!</view>
+      <view class="indent_h3">正在为您呼叫附近的司机</view>
+    </view>
+
+  </view>
+
+  <view class="ImgBox">
+    <image src="../../images/indentmanage.png"></image>
+    <view class="indent_h2">请下载APP</view>
+    <view class="indent_h4">查看完整的订单信息</view>
+  </view>
+
+  <view class="flex_a h3_mg50">
+    <view class="flex_1" wx:if="{{showOs === 'iPhone'}}">
+      <view class="footer_btn btn1_color">
+        <image src="../../images/ios.png"></image>
+        <text class="urlCss">iPhone下载</text>
+      </view>
+    </view>
+    <view class="flex_1" wx:if="{{showOs === 'Android'}}">
+      <view class="footer_btn btn2_color">
+        <image src="../../images/android.png"></image>
+        <text class="urlCss">Android下载</text>
+      </view>
+    </view>
+  </view>
+
+</view>

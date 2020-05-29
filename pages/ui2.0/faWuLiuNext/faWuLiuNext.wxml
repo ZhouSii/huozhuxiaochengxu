@@ -1,0 +1,253 @@
+  <view class="height_100 flex_f">
+    <view class="order-title flex_a f-24 f_44">
+      本平台货物保障服务由中国平安财产保险提供
+    </view>
+
+    <view class="flex_1 b_f5 padding_t_20">
+      <view class="info b_c_w">
+        <view class="flex_a">
+          <image class="left margin_r_20" src="{{faWuLiuForm.agencyInfo.imgSrc}}"></image>
+          <view class="right flex_f flex_js">
+            <view class="f-30 c-3">{{faWuLiuForm.agencyInfo.companyName}}</view>
+            <view class="flex_a">
+              <image class="star" src="{{item ? '../../../images/faWuLiu/rate_star_yellow@2x.png' : '../../../images/faWuLiu/rate_star_gray@2x.png'}}" wx:for="{{fullStar}}" wx:key="index"></image>
+              <view class="margin_l_20 flex_a">
+<!--                <view class="info-attr flex" style="background:rgba(101,168,255,1);">授</view>-->
+                <view class="info-attr flex" style="background:rgba(255,68,0,1);">授权物流商</view>
+              </view>
+            </view>
+            <view class="f-24 c-9">
+             <text>{{faWuLiuForm.agencyInfo.detailAddress}}</text><text class="margin_l_20">{{faWuLiuForm.agencyInfo.distance*1}}km</text>
+            </view>
+          </view>
+        </view>
+        <view class="flex_sb margin_t_30">
+          <view class="info-bottom f-24">
+            <view>{{partPrice.goodsType}}{{partPrice.linePrice}}{{partPrice.unit}} <text wx:if="{{partPrice.singleLowestCost}}">最低一票收费：{{partPrice.singleLowestCost}}元</text></view>
+            <view>预估{{partPrice.estimatedTime}}分钟安排提货，{{partPrice.tranAging}}天后({{tranAgingDay}})到达{{faWuLiuForm.to[1].city}}</view>
+          </view>
+          <view class="button c-9 f-24" bindtap="showAgencyInfoWindow">换一家</view>
+        </view>
+
+      </view>
+
+      <view class="order-item1 flex_a b_c_w margin_t_20">
+        <image src="../../../images/faWuLiu/list_icon_cargo@2x.png" class="img_w"></image>
+        <view class="order-item-l flex_1 flex_sb margin_l_20 padding_r_20">
+          <view  class="c-3 f-30 f_w_b">上门接货</view>
+          <view class="c-3 f-30" bindtap="openTimeWindow">{{faWuLiuNextForm.showTime}}</view>
+          	<switch checked="{{faWuLiuNextForm.pick}}" bindchange="changeSwitch" />
+        </view>
+      </view>
+      <view class="order-item1 flex_a b_c_w">
+        <image src="../../../images/faWuLiu/list_icon_cargo@2x.png" class="img_w"></image>
+        <view class="order-item-l flex_1 flex_sb margin_l_20 padding_r_20">
+          <view class="c-3 f-30 f_w_b">需要送货（不含上楼）</view>
+            <switch checked="{{faWuLiuNextForm.delivery}}" bindchange="changeSwitch1" />
+        </view>
+      </view>
+
+      <view class="order-item1 flex_a b_c_w">
+        <image src="../../../images/faWuLiu/list_icon_baojia@2x.png" class="img_w"></image>
+        <view class="order-item-l flex_1 flex_sb margin_l_20 padding_r_20">
+          <view class="c-3 f-30 f_w_b flex_a">
+            货物保价
+            <image bindtap="showValueWindow" src="../../../images/faWuLiu/list_icon_query@2x.png" class="img_14"></image>
+          </view>
+          <input class="f-30 input_w" type="number" placeholder="请填写您的保价金额" value="{{faWuLiuNextForm.price}}" />
+        </view>
+      </view>
+      <view class="order-item1 flex_a b_c_w">
+        <image src="../../../images/faWuLiu/list_icon_service@2x.png" class="img_w5"></image>
+        <view class="order-item-l flex_1 flex_sb margin_l_20 padding_r_20">
+          <view class="c-3 f-30 f_w_b" style="min-width: 75px;">额外服务</view>
+          <view class="f-30 c-9 flex_a oneElisp" bindtap="openBottomWindow">
+            <text class="oneElisp">{{(faWuLiuNextForm.remark !== '' ||  faWuLiuNextForm.signName !== '')? faWuLiuNextForm.signName + (faWuLiuNextForm.remark && faWuLiuNextForm.signName ? '、' : '') + faWuLiuNextForm.remark : '签收单、发货备注'}}</text>
+            	<i-icon type="enter" />
+          </view>
+        </view>
+      </view>
+      <view class="order-item1 flex_a b_c_w">
+        <image src="../../../images/faWuLiu/list_icon_guarantee@2x.png" class="img_w5"></image>
+        <view class="flex_1 flex_sb margin_l_20 padding_r_20">
+          <view  class="c-3 f-30 f_w_b">付款方式</view>
+          <view class="flex_a c-9">
+              <text class="f-30 flex_a" bindtap="showPayWindow">{{faWuLiuNextForm.payType === 1 ? '现付' : '到付'}} </text><i-icon type="enter" />
+          </view>
+        </view>
+      </view>
+      <view class="order-item1 flex_a">
+      </view>
+    </view>
+
+    <view class="footer b_c_w flex_a width_100">
+      <view class="flex_1 flex_a padding_l_20 padding_r_20 footer-left height_100">
+        <view>
+          <view class="flex_a">
+            <view class="f-24 c-3 margin_r_40 flex_a">预估：<span class="f_44 f-36">{{estimatePrice}}元</span></view>
+            <view class="f-20 c-9 flex_a" bindtap="showDetailWindow">
+              明细<i-icon type="packup" />
+            </view>
+          </view>
+          <view class="f-24 c-9 sub-title">
+            实际运费以物流公司揽货开单为准
+          </view>
+        </view>
+      </view>
+      <view class="footer-right b_c_g flex f_w f-32 height_100" bindtap="pay">提交订单</view>
+    </view>
+  </view>
+
+<!-- 选择承运商 -->
+      <view class="module o_f b_c_w width_100" wx:if="{{showAgencyInfoWindow}}" animation='{{animationDataBottom}}'>
+        <view class="window-title flex_a margin_b_20">
+          <view class="flex_1"></view>
+          <view class="f-34 c-3 flex_3 flex">选择承运商</view>
+          <view class="flex_1 flex_jfe">
+            <i-icon type="close" bindtap="closeBottomWindow"/>
+          </view>
+        </view>
+        <view class="info b_c_w" wx:for="{{faWuLiuForm._agencyInfos}}" wx:key="index">
+          <view class="flex_a"  bindtap="selectedAgency" data-item="{{item}}">
+            <image class="left margin_r_20" src="{{item.imgSrc}}"></image>
+            <view class="right flex_f flex_js flex_1">
+              <view class="f-30 c-3">{{item.companyName}}</view>
+              <view class="flex_sb">
+                <view class="flex_a">
+                  <image class="star" src="{{item1 ? '../../../images/faWuLiu/rate_star_yellow@2x.png' : '../../../images/faWuLiu/rate_star_gray@2x.png'}}" wx:for="{{fullStar}}" wx:for-item="item1" wx:key="{{index1}}"></image>
+                  <view class="margin_l_20">
+                    <view class="info-attr flex" style="background:rgba(255,68,0,1);">授权物流商</view>
+                  </view>
+                </view>
+
+                <image class="phone" catchtap="phone" data-item="{{item}}" src="../../../images/faWuLiu/order-company-phone@2x.png"></image>
+              </view>
+              <view class="f-24 c-9 flex_sb sub-title">
+                <view class="oneElisp">{{item.detailAddress}}</view>
+                <view class="margin_l_20">{{item.distance*1}}km</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+<!-- 上门接货 -->
+    <view class="module o_f b_c_w width_100" wx:if="{{timeWindow}}" animation='{{animationDataBottom}}'>
+        <view class="window-title flex_sb f-30">
+            <view class="f_d8" bindtap="closeBottomWindow">取消</view>
+            <view class="f_g" bindtap="timeOk">确定</view>
+        </view>
+        	<picker-view indicator-style="height: 100rpx;" style="width: 100%; height: 540rpx;" value="{{multiIndex}}" bindchange="bindChange">
+            <picker-view-column>
+              <view wx:for="{{weekList}}" wx:key="index" class="flex" style="line-height: 100rpx">{{item.text}}</view>
+            </picker-view-column>
+            <picker-view-column>
+              <view wx:for="{{timeList}}" wx:key="index" class="flex" style="line-height: 100rpx">{{item.text}}</view>
+            </picker-view-column>            
+          </picker-view>
+
+    </view>
+
+<!-- 货物保价 -->
+      <view class="module o_f b_c_w width_100" wx:if="{{showValueWindow}}" animation='{{animationDataBottom}}'>
+        <view class="window-title flex_a margin_b_20">
+          <view class="flex_1"></view>
+          <view class="f-34 c-3 flex_3 flex">货物保价</view>
+          <view class="flex_1 flex_jfe">
+            <i-icon type="close" bindtap="closeBottomWindow"/>
+          </view>
+        </view>
+        <view class="c-3 f-34 value-window">
+          建议您按照货物实际价值进行保价，若在寄递过程中发生丢损，您最高可获得声明价值（保价金额）赔偿。
+        </view>
+      </view>
+
+<!-- 额外服务 -->
+    <view class="module o_f b_c_w width_100" wx:if="{{servicesWindow}}" animation='{{animationDataBottom}}'>
+        <view class="window-title flex_a">
+          <view class="flex_1"></view>
+          <view class="f-34 c-3 flex_3 flex">额外服务</view>
+          <view class="flex_1 flex_jfe">
+            <i-icon type="close" bindtap="closeBottomWindow"/>
+          </view>
+        </view>
+        <view class="flex_a f_f window-body">
+          <view class="margin_t_40 margin_b_40 flex_a width_100">
+            <view class="f-30 c-3 f_w_b body-title">回单：</view>
+            <view class="flex_sb flex_1 margin_l_20">
+              <view wx:for="{{signList}}" wx:key="index" bindtap="selectedSign" data-item="{{item}}">
+                <view class="goods-button-item f-28 flex" style="color:{{(item.code === windowForm.extraCodeTemp)? '#1EAF01':'#333333'}};border-color:{{(item.code === windowForm.extraCodeTemp)? '#1EAF01':'#C7C7C7'}};background:{{(item.code === windowForm.extraCodeTemp)? '#EBF7E8':'#ffffff'}}">
+                    {{item.name}}
+                </view>
+              </view>
+            </view>
+          </view>
+
+          <view class="margin_b_40 flex_a width_100">
+<!--            <div class="f-30 c-3 f_w_b body-title">代收货款：</div>-->
+<!--            <div class="goods-payment margin_l_20 flex_1 flex_a">-->
+<!--              <input type="text" class="input-window f-28 margin_l_20 width_100" v-model="windowForm.receivedAmountTemp" @focus="inputFocus" @blur="blur" placeholder="请填写您的代收货款金额" @input="(e)=>{_formatNumber(e, 2,windowForm,'receivedAmountTemp')}" @blur="(e)=>{checkPoint(windowForm,'receivedAmountTemp',e)}">-->
+<!--            </div>-->
+          </view>
+
+          <view class="margin_b_20 flex_se width_100">
+            <view class="f-30 c-3 f_w_b body-title margin_t_20">发货备注：</view>
+            <view class="goods-payment-textarea margin_l_20 flex_1 flex_a">
+              <view class="p_r width_100 flex_a">
+                <textarea class="f-28 flex_1" rows="5" cols="20" value="{{windowForm.remarkTemp}}" maxlength="60" bindinput="checkInput" placeholder="请填写您的发货备注"></textarea>
+                <div class="f-24 textarea_in">
+                  <span class="f_r">{{windowForm.remarkTemp.length}}</span>/60
+                </div>
+              </view>
+            </view>
+          </view>
+          <view class="margin_b_40 flex_a width_100">
+            <view class="f-30 c-3 f_w_b body-title"></view>
+            <view class="f_f flex_a flex_1">
+                <view wx:for="{{remarkList}}" wx:key="index" bindtap="selectedRemark" data-item="{{item}}" class="margin_l_20 remark-button-item f-30 f_w_b c-3 flex">+{{item.name}}</view>
+            </view>
+          </view>
+
+          <view class="success-button f_w f_w_b flex f-36 margin_t_40 width_100" bindtap="clickSuccess">
+            确 定
+          </view>
+        </view>
+    </view>
+
+<!-- 付款方式 -->
+    <view class="module o_f b_c_w width_100" wx:if="{{showPayWindow}}" animation='{{animationDataBottom}}'>
+        <view class="window-title flex_a margin_b_20">
+            <view class="flex_1"></view>
+            <view class="f-34 c-3 flex_3 flex">付款方式</view>
+            <view class="flex_1 flex_jfe">
+            <i-icon type="close" bindtap="closeBottomWindow"/>
+            </view>
+        </view>
+
+        <view class="flex_sb pay-item margin_b_40" bindtap="selectedPay" data-item="{{item}}" wx:for="{{payList}}" wx:key="index">
+            <view>
+            <view class="c-3 f-30">{{item.name}}</view>
+            <view class="c-9 f-20 margin_t_20">{{item.sub}}</view>
+            </view>
+            <image wx:if="{{item.type !== faWuLiuNextForm.payType}}" src="../../../images/faWuLiu/pay_unselected@2x.png"></image>
+            <image wx:else src="../../../images/faWuLiu/pay_selected@2x.png"></image>
+        </view>
+    </view>
+
+<view class="{{showMask?'mask':''}}" bindtap="closeBottomWindow" animation='{{animationData}}'></view>
+
+<!-- 预估 -->
+  <view class="module1 o_f b_c_w width_100" wx:if="{{showDetailWindow}}" animation='{{animationDataBottom}}'>
+    <view class="window-title flex_a">
+      <view class="flex_1"></view>
+      <view class="f-34 c-3 flex_3 flex">预估<span class="f_44">{{estimatePrice}}</span>元</view>
+      <view class="flex_1 flex_jfe">
+        <i-icon type="close" bindtap="closeBottomWindow1"/>
+      </view>
+    </view>
+    <view class="info-item flex_sb {{(item.priceKey === 'AF0711902' || item.priceKey === 'AF0711901') ? 'lemonchiffon': ''}}" wx:if="{{item.show && item.priceValue}}" wx:for="{{calculateList}}" wx:key="index">
+      <view>{{item.priceName}}<text class="c-3" wx:if="{{item.priceKey === 'AF0711902' || item.priceKey === 'AF0711901'}}">(限在线支付运费)</text></view><div>￥{{item.priceValue}}</div>
+    </view>
+    <div class="info-item flex_sb"></div>
+  </view>
+<view class="{{showMask1?'mask1':''}}" bindtap="closeBottomWindow1" animation='{{animationData}}'></view>

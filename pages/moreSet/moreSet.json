@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "i-action-sheet": "../../dist/action-sheet/index"
+  },
+  "navigationBarTitleText": "设置"
+}

@@ -1,0 +1,125 @@
+<view class="flex_f width_100 height_100">
+    <view class="flex_a order-top">
+      <view class="flex_1 flex_a">
+        <image mode='aspectFit' class="navi_bar_img" src="../../../images/order2.0/man@2x.png" bindtap='toggleLeft'></image>
+      </view>
+      <view class="f_w flex_a f-24">
+        <image class="navi_bar_center" src="../../../images/order2.0/28hy@2x.png"></image>
+        <view class="point_w"></view>
+        <navigator url="/pages/ui2.0/chooseCity/chooseCity">
+          {{cityAdcode[0] ? cityAdcode[0] : '定位中...'}}
+          <image class="navi_bar_array" src="../../../images/order2.0/array_down@2x.png"></image>
+        </navigator>
+      </view>
+      <view class="flex_1"></view>
+    </view>
+    <view class="flex_f flex_1 bg">
+      <view class="order_body_top flex_sb f-30 p_r">
+        <view class="flex flex_1 f_w_b" wx:for="{{tabType}}" wx:key="index" data-id="{{item.id}}" bindtap="changeSendType">
+          {{item.name}}
+        </view>
+        <view class="xiao_huo_che flex" wx:if="{{tabTypeId === 0}}">
+          <view class="p_r flex">
+            <image src="../../../images/order2.0/left@2x.png"></image>
+            <view class="c-4 f-32 f_w_b flex pos_a">小货车</view>
+          </view>
+        </view>
+        <view class="fa_wu_hiu flex" wx:if="{{tabTypeId === 1}}">
+          <view class="p_r flex">
+            <image src="../../../images/order2.0/middle@2x.png"></image>
+            <view class="c-4 f-32 f_w_b flex pos_a">发物流</view>
+          </view>
+        </view>
+      </view>
+    <view hidden="{{tabTypeId === 1}}">
+      <xiaoHuoCheOrder id="xiaoHuoCheOrder" cityAdcode="{{cityAdcode}}" tabTypeId="{{tabTypeId}}" bind:getCityAdcode="getCityAdcode"></xiaoHuoCheOrder>
+    </view>
+    <view hidden="{{tabTypeId === 0}}">
+      <faWuLiuOrderOrder id="faWuLiuOrderOrder"></faWuLiuOrderOrder>      
+    </view>
+
+    </view>
+
+</view>
+
+<i-drawer mode="left" visible="{{showLiftWindow}}" bind:close="toggleLeft">
+  <view class="left-module" style='width:{{windowWidth / 2}}px;height:{{windowHeight}}px'>
+    <view style="height: 100px;padding-left: 60rpx;" class="flex_a">
+
+      <view wx:if="{{userInfo}}">
+        <image mode='aspectFit' wx:if="{{userInfo.personalImageFile===''}}" class="circle b_f5 margin_t_40" src="../../../images/wodesj_tx_def@2x.png" alt=""></image>
+        <image mode='aspectFit' wx:else class="circle b_f5 margin_t_40" src="{{userInfo.personalImageFile}}" alt=""></image>
+      </view>
+
+      <view wx:else class="circle b_f5"></view>
+
+      <navigator wx:if="{{!userInfo}}" url="/pages/ui2.0/login/login">
+        <view class="f-32 c-3 margin_l_20">
+          立即登录
+        </view>
+      </navigator>
+
+      <view wx:else class="margin_l_20 margin_t_40">
+        <view class="f-32 c-3">{{userInfo.nickname?userInfo.nickname:userInfo.mobile}}</view>
+        <image mode='aspectFit' src="../../../images/order2.0/index/certified@2x.png" class="certified" wx:if="{{userInfo.authStatusName === '已认证'}}"></image>
+      </view>
+    </view>
+    <view class="status f-24 flex" wx:if="{{userInfo && userInfo.authStatusName !== '已认证'}}">
+      {{userInfo.authStatusName}}
+    </view>
+
+    <navigator url="">
+      <view class="left-module-item f-28 c-3 flex_a margin_t_20" bindtap="toOrderManage">
+        <image mode='aspectFit' src="../../../images/order2.0/index/order@2x.png" class='img_s'></image>
+        同城快车订单
+      </view>
+    </navigator>
+    <navigator url="">
+      <view class="left-module-item f-28 c-3 flex_a" bindtap="toOrderManage">
+        <image mode='aspectFit' src="../../../images/order2.0/index/order@2x.png" class='img_s'></image>
+        零担专线订单
+      </view>
+    </navigator>
+    <!-- <navigator url="/pages/chargeStandard/chargeStandard?city={{form._cityAdcode[0]}}&adcode={{form._cityAdcode[1]}}">
+      <view class="left-module-item f-28 c-3 flex_a">
+        <image mode='aspectFit' src="../../../images/me_yhxy.png" style='width:18px;height:22px;'></image>
+        收费标准
+      </view>
+    </navigator> -->
+
+    <!-- <navigator url="/pages/userAgreement/userAgreement">
+      <view class="left-module-item f-28 c-3 flex_a">
+        <image mode='aspectFit' src="../../../images/me_siji@2x.png" style='width:18px;height:20px;'></image>
+        用户协议
+      </view>
+    </navigator> -->
+
+    <!-- <navigator url="/pages/serviceCenter/serviceCenter">
+      <view class="left-module-item f-28 c-3 flex_a">
+        <image mode='aspectFit' src="../../../images/me_kefu@2x.png" style='width:18px;height:20px;'></image>
+        客服中心
+      </view>
+    </navigator> -->
+
+    <navigator url="">
+      <view class="left-module-item f-28 c-3 flex_a" bindtap="toWallet">
+        <image src="../../../images/order2.0/index/wallet@2x.png" class='img_s'></image>
+        我的司机
+      </view>
+    </navigator>
+
+    <navigator url="">
+      <view class="left-module-item f-28 c-3 flex_a" bindtap="toDriver">
+        <image src="../../../images/order2.0/index/driver@2x.png" class='img_s'></image>
+        我的司机
+      </view>
+    </navigator>
+
+    <navigator url="">
+      <view class="left-module-item f-28 c-3 flex_a" bindtap="toMoreSet">
+        <image src="../../../images/order2.0/index/me_setting@2x.png" class='img_s'></image>
+        更多设置
+      </view>
+    </navigator>
+  </view>
+</i-drawer>

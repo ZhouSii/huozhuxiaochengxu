@@ -1,0 +1,45 @@
+page{
+  width:100%;
+  height:100%;
+}
+.i-index-demo-item{
+  padding:10px;
+  border-bottom:#ddd solid 1rpx;
+  font-size:14px;
+}
+
+.city-history{
+  min-height: 100rpx;
+  font-size: 28rpx;
+  color: #999;
+  background: #f7f7f7;
+}
+.city-button{
+  height: 80rpx;
+  width: 33.3%;
+}
+.cube-index-list-anchor {
+  padding: 32rpx 32rpx 20rpx;
+  line-height: 1;
+  font-size: 28rpx;
+  color: #999;
+  background: #f7f7f7;
+}
+.city-button navigator{
+  height: 80rpx;
+  line-height: 80rpx;
+  width: 70%;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.search{
+  height: 100rpx;
+}
+.search-body{
+  height: 80rpx;
+  border-radius: 10rpx;
+  background-color: #f7f7f7;
+  margin: 0 20rpx;
+}

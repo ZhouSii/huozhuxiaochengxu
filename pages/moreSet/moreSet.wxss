@@ -1,0 +1,20 @@
+  page{
+    background-color: #f5f5f5
+  }
+  .item{
+    padding: 0 40rpx;
+    height: 80rpx;
+  }
+  .success {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+}
+  .success-button {
+    height: 96rpx;
+    background-color: #2fb301;
+    border-radius: 10rpx;
+    margin: 20rpx;
+}

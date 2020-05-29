@@ -1,0 +1,37 @@
+<view class="height_100 flex_f">
+  <view class="flex_1 b flex_f">
+    <view class="flex_1">
+      <view class="address-item flex_a b_b" bindtap="back">
+        <icon type="search" size="20" style="margin: 0 40rpx" />
+        <text>{{addressData.originName}}</text>
+      </view>
+
+      <view class="address-item flex_a b_b">
+        <image mode='aspectFit' src="../../images/menpaih.png" style='width:21px;height:19px'></image>
+        <input type="text" value="{{addressData._floorHousenum}}" placeholder="请填写详细地址如门牌号（可不填）" class="my-input" bindinput='checkFloorHousenum'></input>
+      </view>
+
+      <view class="address-item flex_a b_b margin_t_20">
+        <image mode='aspectFit' src="../../images/fahuor.png" style='width:20px;height:20px'></image>
+        <input type="text" value="{{addressData.consignee}}" bindinput='checkConsignee' placeholder="{{addressData.shipperSort === 0?'请输入发货人姓名（可不填）':'请输入收货人姓名（可不填）'}}" class="my-input"></input>
+      </view>
+
+      <view class="address-item flex_a b_b ">
+        <image mode='aspectFit' src="../../images/nav_phone.png" style='width:14px;height:23px'></image>
+        <input type="number" value="{{addressData.consigneeMobile}}" bindinput='checkConsigneeMobile' maxlength="11" placeholder="{{addressData.shipperSort === 0?'请输入联系人电话':'请输入联系人电话（可不填）'}}" class="my-input"></input>
+      </view>
+
+      <label class="flex_a margin_l_40" wx:if="{{addressData.shipperSort !== 0}}">
+        <checkbox-group bindchange="clickCheckBox">
+          <checkbox value="{{checkBox.name}}" checked="{{addressData.isSms}}" />
+        </checkbox-group>
+        <view class="c-3 f-28">
+          短信验证签收
+        </view>
+      </label>
+    </view>
+    <view class="submit flex f_w f-32" bindtap="toOrder">
+      确认
+    </view>
+  </view>
+</view>

@@ -1,0 +1,45 @@
+{
+  "pages": [
+    "pages/ui2.0/myDrivers/myDrivers",
+    "pages/ui2.0/index/index",
+    "pages/ui2.0/orderManage/orderManage",
+    "pages/ui2.0/remark/remark",
+    "pages/ui2.0/claims/claims",
+    "pages/ui2.0/waybillClause/waybillClause",
+    "pages/ui2.0/chooseCity/chooseCity",
+    "pages/ui2.0/login/login",
+    "pages/ui2.0/showMap/showMap",
+    "pages/ui2.0/orderNext/orderNext",
+    "pages/order/order",
+    "pages/orderNext/orderNext",
+    "pages/routeManage/routeManage",
+    "pages/handleManage/handleManage",
+    "pages/preferential/preferential",
+    "pages/fareEstimate/fareEstimate",
+    "pages/requestList/requestList",
+    "pages/remark/remark",
+    "pages/showMap/showMap",
+    "pages/showAddress/showAddress",
+    "pages/orderManage/orderManage",
+    "pages/moreSet/moreSet",
+    "pages/login/login",
+    "pages/loginCode/loginCode",
+    "pages/chooseCity/chooseCity",
+    "pages/chargeStandard/chargeStandard",
+    "pages/userAgreement/userAgreement",
+    "pages/rewardInfo/rewardInfo",
+    "pages/serviceCenter/serviceCenter"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "28快运企业货主",
+    "navigationBarTextStyle": "black"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "请允许获取地理位置"
+    }
+  },
+  "sitemapLocation": "sitemap.json"
+}

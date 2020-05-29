@@ -1,0 +1,31 @@
+<view class="height_100 flex_f myDrivers">
+    <block>
+        <view class="flex_1">
+            <view class="flex flex_f noImage">
+                <image src="../../../images/order2.0/noDriverBg.png" alt="" class="noImage_img" />
+                <text class="noTips">暂无数据</text>
+            </view>
+        </view>
+    </block>
+    <view class="btnBox">
+        <button class="btnBox_btn flex" bindtap="addDrivers">
+            <view class="flex_a">
+                <!-- <i class="myDriverIcon"></i> -->
+                <image class="myDriverIcon" src="../../../images/order2.0/myDriverIcon.png"></image>
+                添加信任的司机
+            </view>
+        </button>
+    </view>
+    <view class="maskView" hidden="{{addDriversStatus}}">
+        <view class="diag">
+            <view class="wx_title">添加信任的司机</view >
+            <view class="wx_input">
+                <input class="weui-input" focus="{{autoFocus}}" type="number" placeholder="输入司机的手机号" />
+            </view>
+            <view class="wx_btn flex">
+                <view class="wx_btn_cancel" bindtap="closeMsk">取消</view>
+                <view class="wx_btn_sure"  bindtap="submit">确定</view>
+            </view>
+        </view>
+    </view>
+</view>

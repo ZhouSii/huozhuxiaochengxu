@@ -1,0 +1,29 @@
+ <view class="height_100 flex_f b_t">
+    <view class="flex_1 padding_20">
+      <view class="p_r">
+        <textarea class="f-24" value="{{remark}}" maxlength="60" bindinput="checkInput" />
+        <view class="f-24 "><text>{{remark.length}}</text>/60</view>
+      </view>
+
+      <view class="flex_a f_f margin_t_20">
+        <view class="goods-button" wx:for="{{goodsList}}" wx:key="{{index}}" data-item='{{item}}' bindtap="selectedGoods">
+          <text class="goods-button-item c-7 f-24 flex">{{item.name}}</text>
+        </view>
+      </view>
+
+      <view class="flex margin_t_40 margin_b_40">
+        <view class="divide"></view>
+        <view class="c-9 f-24 margin_l_20 margin_r_20">历史记录</view>
+        <view  class="divide"></view>
+      </view>
+      <view wx:if="{{mobile === item.mobile}}" wx:for="{{remarkList}}" wx:key="{{index}}" >
+        <view class="{{(remarkIndex === index1)?'remark-selected':'remark-noselected'}}" class="width_100 height_100 remark-item f-28" wx:for="{{item.list}}" wx:for-item="item1" wx:key="{{index1}}" data-item1='{{item1}}' data-index1='{{index1}}' bindtap="selectHistory">{{item1.name}}</view>
+      </view>
+      <view class="_h"></view>
+      <view class="success" bindtap="successSubmit">
+        <view class="button_g flex f_w f-36 f_w_b">
+          确认
+        </view>
+      </view>
+    </view>
+  </view>

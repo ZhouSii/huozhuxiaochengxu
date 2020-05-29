@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "i-drawer": "../../../dist/drawer/index",
+    "xiaoHuoCheOrder": "../../../components/xiaoHuoCheOrder/xiaoHuoCheOrder",
+    "faWuLiuOrderOrder": "../../../components/faWuLiuOrder/faWuLiuOrder"
+  }
+}

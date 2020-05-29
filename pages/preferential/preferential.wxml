@@ -1,0 +1,82 @@
+<view class="height_100 flex_f">
+
+  <view class="flex_1 flex_f b_f5 ">
+    <view class="flex_sb padding_20_40 b_c_w f-28">
+      <view class="flex_a">
+        <text class="c-3 margin_r_20">货主补贴佳惠</text>
+        <i-icon type="feedback" color="red" size="20" bindtap='toRewardInfo'/>
+      </view>
+      <view class="flex_a">
+        <text wx:if="{{form.mathPriceList.reward !== 0}}" class="c-9 margin_r_20">-{{form.mathPriceList.reward}}元</text>
+        <text wx:else class="c-9 margin_r_20">未参与优惠</text>
+        <switch checked="{{form.mathPriceList.reward !== 0}}" bindchange="switch1Change" />
+      </view>
+    </view>
+
+    <view class="flex_a padding_20_40">
+      <view class="input-style flex_a b_c_w">
+        <input type="text" class="my-input margin_l_20" value="{{inputData}}" bindinput='setInputData' placeholder="请输入优惠卷码" />
+      </view>
+      <view class="goods-submit flex margin_l_20 f_w" bindtap="volumeSubmit">兑换</view>
+    </view>
+
+    <view wx:if="{{couponList !== '暂时没有优惠券'}}" class="o_f flex_1 margin_b_20" style="-webkit-overflow-scrolling : touch">
+
+      <view class="exchange-owner pointer" wx:for="{{couponList}}" wx:key="{{index}}">
+        <view class="exchange-item flex_a">
+          <view class="exchange-item-left flex b_c_w p_r f_w" data-item='{{item}}' bindtap="selectExchange">
+
+            <image mode='aspectFit' src="../../images/youhuiq.png" alt="" style="filter:{{item.isCanUse && (item.ifvouchersuperposition === '1' || (item.ifvouchersuperposition === '0' && aflcShipperPreferentialtDetailDto === null)) ?'opacity(1)':'opacity(0.5)'}}"></image>
+
+            <view class="exchange-item-left-title flex_f flex_a" wx:if="{{item.couponType === 'AF046201'}}">
+              <view class="f-44 flex">￥{{item.remissionDiscount}}</view>
+              <view class="f-24">满{{item.conditionDeduction}}可用</view>
+            </view>
+            <view class="exchange-item-left-title flex_f flex_a" wx:if="{{item.couponType === 'AF046202'}}">
+              <view class="f-44 flex">{{item.remissionDiscount}}折</view>
+              <view class="f-24">最高抵扣{{item.conditionDeduction}}元</view>
+            </view>
+          </view>
+          <view class="exchange-item-right flex_1 flex_f flex_js height_100">
+            <image mode='aspectFit' class="selected" src="../../images/selected.png" wx:if="{{form.couponId === item.id && item.isCanUse && (item.ifvouchersuperposition === '1' || (item.ifvouchersuperposition === '0' && aflcShipperPreferentialtDetailDto === null))}}"></image>
+            <view class="flex_1 flex_f flex_j p-30" data-item='{{item}}' bindtap="selectExchange">
+              <view class="f-28 c-3">{{item.couponName}}</view>
+              <view class="f-24 c-9 margin_t_20">{{item.grantTime}} - {{item.endTime}}</view>
+            </view>
+            <view class="flex_sb p-30 info" data-item='{{item}}' data-index='{{index}}' bindtap="showItem">
+              <span class="f-24 c-9">详细信息</span>
+              <i class="iconfont icon-xiala margin_r_20"></i>
+            </view>
+          </view>
+        </view>
+
+        <view class=" heightTran" wx:if="{{item.show}}">
+          <view class="b_c_w padding_40 f-24 c-9">
+            <view class="margin_b">1、仅限在线支付使用</view>
+            <view class="margin_b">2、适用服务类型{{item.serivceName}}订单</view>
+            <view class="margin_b">3、适用车辆类型{{item.carTypeName}}订单</view>
+            <view class="margin_b">4、订单出发地为{{item.province}}-{{item.city}}-{{item.area}}时可用</view>
+            <view>5、{{item.ifvouchersuperposition === '1'?'能':'不能'}}与货主补贴优惠叠加使用</view>
+          </view>
+
+        </view>
+
+
+      </view>
+
+    </view>
+
+    <view wx:else class="flex flex_1">
+      <view class="f-24 c-9">
+        {{couponList}}
+      </view>
+    </view>
+
+    <view style="height: 58px"></view>
+  </view>
+  <view class="success " bindtap="successSubmit">
+    <view class="button flex f_g">
+      不使用优惠卷
+    </view>
+  </view>
+</view>

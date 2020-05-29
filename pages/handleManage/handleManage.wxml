@@ -1,0 +1,59 @@
+<view class="height_100 flex_f">
+  <view class='margin_b_20 padding_l_20 padding_r_20'>
+    <view class="f-24 c-9 flex_ce" bindtap='reset'>重置</view>
+  </view>
+
+  <view class="flex_1 b_f5">
+    <view class="addressTopDiv o_f wk-touch">
+      <view class="margin_l_20">
+        <input type="text" value="{{formRoute.lineName}}" class="my-input f-28" bindinput="checkInput" placeholder="点击此处输入路线名称" />
+      </view>
+
+      <block wx:for="{{formRoute.addRoute}}" wx:key="{{index}}">
+        <view class="flex_a">
+          <view class="dotCont flex p_r" data-i='{{index}}' bindtap="updateAddressList">
+            <view class="{{(index===0)?'greendot':''}}"></view>
+            <view wx:if="{{index === 1}}" style='transform: rotate(45deg)'>
+              <i-icon type="delete_fill" class="c-9" size="22" />
+            </view>
+            <i-icon wx:if="{{index>1}}" type="offline_fill" class="c-9" size="22" />
+            <view wx:if="{{index !== 0}}" class="line"></view>
+          </view>
+
+          <view class="flex_1 line-item margin_l_20 flex_a" data-item='{{item}}' bindtap="toShowMap">
+            <view wx:if="{{item.originName !== ''}}">
+              <view class="addressDetail c-3 f-28">{{item.originName}}</view>
+              <view class="addressDetail c-9 f-24">{{item.origin}} {{item.addressDetail ? item.addressDetail: ''}}</view>
+            </view>
+            <view class="c-9" wx:else>
+              <view wx:if="{{index === 0}}">
+                请输入发货地址
+              </view>
+              <view wx:else>
+                请输入收货地址
+              </view>
+            </view>
+
+          </view>
+          <view class='line-item-r flex' data-i='{{index}}' bindtap="openWindow">
+            <image mode='aspectFit' src='../../images/renlanai@2x.png' style='width:28rpx;height:34rpx'></image>
+          </view>
+        </view>
+      </block>
+    </view>
+
+    <view class="white " bindtap="successSubmit">
+      <view class="white-button flex f-32">
+        确定{{formRoute.lineName !== ''?'编辑':'添加'}}
+      </view>
+    </view>
+  </view>
+</view>
+<i-action-sheet visible="{{ visible }}" actions="{{ actions }}" show-cancel bind:cancel="handleCancel" bind:click="handleClickItem">
+  <view slot="header" style="padding: 20rpx">
+    <text style="color: #444;font-size: 26rpx">确定要重置吗</text>
+  </view>
+</i-action-sheet>
+<!-- 地址详情弹窗 -->
+<import src="../../template/addressDetailWindow/addressDetailWindow" />
+<template is="addressDetailWindow" data="{{addr:formRoute.addRoute,showWindow,checkedSms,showSms,i}}" />

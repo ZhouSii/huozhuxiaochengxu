@@ -1,0 +1,145 @@
+<view class="flex_1 p_r">
+    <view class="order_body">
+      <view class="addressTopDiv2">
+        <block wx:for="{{faWuLiuForm.to}}" wx:key="index">
+          <view class="flex_a">
+            <view class="dotCont flex p_r">
+              <view wx:if="{{index === 0}}" class="greendot2"></view>
+              <view wx:if="{{index === 1}}" class="reddot2"></view>
+            </view>
+            <view class="flex_1 line-item2 flex_a">
+              <view class="flex_1" bindtap="toShowMap" data-item="{{item}}">
+                <view wx:if="{{item.originName !== ''}}">
+                  <view class="addressDetail2 c-3 f-28">{{item.originName}} {{item.addressDetail}}</view>
+                  <view class="addressDetail2 c-9 f-24">{{item.origin}}</view>
+                </view>
+                <view class="margin_l_20 c-9 f-32" wx:else>
+                  <view wx:if="{{index === 0}}">
+                    您从哪儿出发
+                  </view>
+                  <view wx:else>
+                    您要送去哪儿
+                  </view>
+                </view>
+              </view>
+              <view wx:if="{{index === 0}}" bindtap="showWindow" data-item="{{item}}">
+                <image src="../../images/order2.0/fahuo@2x.png" alt="" class="img_map"></image>
+              </view>
+
+              <view wx:if="{{index!==0}}" bindtap="showWindow" data-item="{{item}}">
+                <image src="../../images/order2.0/suohuo@2x.png" alt="" class="img_map"></image>
+              </view>
+            </view>
+          </view>
+          <view class="margin_l_30" style="border-bottom:{{faWuLiuForm.to.length !== index + 1 ? '2rpx solid #E6E6E6' : ''}}"></view>
+        </block>
+      </view>
+    </view>
+    <view class="c-4 f-30 f_w_b info_title margin_b_20">
+      货物信息
+    </view>
+    <view class="order_body">
+      <view class="flex_sb info-item">
+        <text class="c-4 f-28">货名</text>
+        <view class="goods-selected flex_sb" bindtap="showBottomWindow">
+          <text class="f-24 flex_1 flex {{faWuLiuForm.goodsName? 'c-4' : 'c-a9'}}">{{faWuLiuForm.goodsName ? faWuLiuForm.goodsName : '选择货物'}}</text>
+          	<i-icon  type="enter" size="14" />
+        </view>
+      </view>
+      <view class="flex_sb info-item">
+        <text class="c-4 f-28 margin_r_20">重量</text>
+        <view class="flex_a">
+          <input placeholder="填写货物总重量" class="fa_input f-24" type="number" value="{{faWuLiuForm.weight}}" bindinput="inputWeight" />
+          <text class="c-4 f-24 margin_l_20">吨</text>
+        </view>
+      </view>
+      <view class="flex_sb info-item">
+        <text class="c-4 f-28 margin_r_20">总体积</text>
+        <view class="flex_a">
+          <input placeholder="填写货物总体积" class="fa_input f-24" type="digit" value="{{faWuLiuForm.volume}}" bindinput="inputVolume" bindblur="inputBlur" />
+          <text class="c-4 f-24 margin_l_20">方</text>
+        </view>
+      </view>
+
+      <view class="flex_sb info-item">
+        <text class="c-4 f-28 margin_r_20">数量</text>
+        <view class="flex_a">
+          <input placeholder="填写货物总数量" class="fa_input f-24" type="number" value="{{faWuLiuForm.number}}" bindinput="inputNumber" />
+          <text class="c-4 f-24 margin_l_20">件</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="flex_a f-28 margin_t_20">
+      <image bindtap="selectClause" class="select" src="../../images/order2.0/no_selected@2x.png" wx:if="{{!faWuLiuForm._selected}}"></image>
+      <image bindtap="selectClause" class="select" src="../../images/order2.0/selected@2x.png" wx:if="{{faWuLiuForm._selected}}"></image>
+      <text class="c-9 margin_l_20"> 我已阅读并同意</text>
+      <text class="f_g" bindtap="openClause">《零担订单契约条款》</text>
+    </view>
+
+    <view class="footer flex_sb">
+      <view>
+        <text class="c-4 f-24" bindtap="test">预计</text>
+        <text class="f_44 f-60">{{faWuLiuForm.estimatePrice + faWuLiuForm.reductionPrice}}</text>
+        <text class="c-4 f-24">元</text>
+      </view>
+      <view class="button flex f-36 f_w" bindtap="toFaWuLiuNext" style="background: {{step ? '#2fb301' : 'rgba(216,216,216,1)'}}">下一步</view>
+    </view>
+</view>
+
+
+    <view class="module o_f b_c_w width_100" animation='{{animationDataBottom}}'>
+        <view wx:if="{{goodsListWindow}}">
+            <view class="window-title flex_a">
+            <view class="flex_1"></view>
+            <view class="f-34 c-3 flex_3 flex">请选择货物类型</view>
+            <view class="flex_1 flex_jfe">
+                <i-icon type="close"  bindtap="closeBottomWindow" />
+            </view>
+            </view>
+            <view class="flex_a f_f window-body">
+            <view class="goods-button flex_se" wx:for="{{goodsList}}" wx:key="index" bindtap="selectedGoods" data-item="{{item}}">
+                <text class="goods-button-item c-3 f-24 flex" style="color:{{(item.code === faWuLiuForm.goodsCode)? '#5BB444':'#666666'}};border-color:{{(item.code === faWuLiuForm.goodsCode)? '#5BB444':'#666666'}}">{{item.name}}</text>
+            </view>
+            </view>
+        </view>
+    </view>
+	<view class="{{showMask?'mask':''}}" bindtap="closeBottomWindow" animation='{{animationData}}'></view>
+
+
+
+<view class='window p_r' wx:if="{{showAddressWindow}}" animation='{{animationData}}'>
+	<view class="flex_a window_top">
+		<view class="flex_1"></view>
+		<view class='f-32 c-4 flex'>{{addr.shipperSort === 0 ? '发' : '收'}}货人信息</view>
+		<view class="flex_1 c-7 f-24 flex_jfe margin_r_30"></view>
+	</view>
+
+	<view class='flex_sb item' bindtap='toShowMap' data-item="{{addr}}">
+		<view class='flex_a'>
+			<image wx:if='{{addr.shipperSort === 0}}' src='../../images/order2.0/start@2x.png' class="img1" />
+			<image wx:else src='../../images/order2.0/end@2x.png' class="img1" />
+			<view class='c-3 f-28 margin_l_20'>{{addr.originName}}</view>
+		</view>
+		<i-icon type="enter" size="18" color="#777777" />
+	</view>
+	<view class="divide"></view>
+
+	<view class='flex_a item'>
+		<image src='../../images/order2.0/address@2x.png' class="img2" />
+		<input value="{{addr.addressDetail}}" bindinput="setAddressDetail" class="c-4 f-28 margin_l_20 flex_1" placeholder="详细地址如门牌号（可不填）" />
+	</view>
+	<view class="divide"></view>
+	<view class='flex_a item'>
+		<image src='../../images/order2.0/name@2x.png' class="img2" alt="" />
+		<input value="{{addr.consignee}}" bindinput="setConsignee" class="c-4 f-28 margin_l_20 flex_1" placeholder="{{addr.shipperSort === 0 ? '发货人姓名（可不填）' : '收货人姓名（可不填）'}}" />
+	</view>
+	<view class="divide"></view>
+	<view class='flex_a item'>
+		<image src='../../images/order2.0/phone@2x.png' class="img2" alt="" />
+		<input value="{{addr.consigneeMobile}}" bindinput="setConsigneeMobile" type="number" class="c-4 f-28 margin_l_20 flex_1" placeholder="联系人电话（可不填）" />
+	</view>
+	<view class='button flex f_w f-36' bindtap="submitWindow">确定</view>
+	<image class='close' bindtap='closeAddressWindow' src='../../images/Combined_Shape@2x.png' />
+</view>
+  <view class="{{showAddressWindow?'mask':''}}" animation='{{animationData}}'></view>

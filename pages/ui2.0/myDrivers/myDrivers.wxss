@@ -1,0 +1,154 @@
+/* pages/ui2.0/myDrivers/myDrivers.wxss */
+page {
+    height: 100%;
+}
+
+.noImage {
+    margin: 360rpx 144rpx 0 146rpx;
+}
+
+.noImage_img {
+    width: 460rpx;
+    height: 254rpx;
+}
+
+.noTips {
+    width: 128rpx;
+    height: 44rpx;
+    font-size: 32rpx;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: rgba(119, 119, 119, 1);
+    line-height: 44rpx;
+    margin-top: 40rpx;
+}
+
+.btnBox {
+    height: 132rpx;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0px -4px 20rpx 0rpx rgba(0, 0, 0, 0.05);
+    padding: 20rpx 30rpx;
+    box-sizing: border-box;
+}
+
+.btnBox_btn {
+    width: 690rpx;
+    height: 92rpx;
+    background: linear-gradient(90deg, rgba(65, 191, 14, 1) 0%, rgba(30, 175, 1, 1) 100%);
+    box-shadow: 0rpx 4rpx 12rpx 0rpx rgba(30, 175, 1, 0.3);
+    border-radius: 46rpx;
+    font-size: 36rpx;
+    font-family: PingFangSC-Medium, PingFang SC;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 1);
+}
+
+.myDriverIcon {
+    display: inline-block;
+    width: 36rpx;
+    height: 36rpx;
+    margin-right: 16rpx;
+    vertical-align: middle;
+    /* background-image: url('../../../images/order2.0/myDriverIcon.png') no-repeat; */
+}
+
+.maskView {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 99;
+}
+
+.diag {
+    box-sizing: border-box;
+    position: absolute;
+    left: 104rpx;
+    top: 75rpx;
+    width: 540rpx;
+    /* height: 296rpx; */
+    background: rgba(255, 255, 255, 1);
+    border-radius: 12rpx;
+    padding: 40rpx 30rpx 20rpx;
+}
+
+.wx_title {
+    font-size: 32rpx;
+    font-family: PingFangSC-Medium, PingFang SC;
+    font-weight: 500;
+    color: rgba(68, 68, 68, 1);
+    line-height: 44rpx;
+    text-align: center;
+    margin-bottom: 20rpx;
+}
+.wx_input{
+    margin-bottom: 60rpx;
+}
+.wx_input .weui-input {
+    background: rgba(242, 242, 242, 1);
+    border-radius: 8px;
+    padding: 16rpx 30rpx 18rpx;
+    font-size: 24rpx;
+    /* font-family:PingFangSC-Regular,PingFang SC; */
+    /* font-weight:400; */
+    color: rgba(169, 169, 169, 1);
+    line-height: 34rpx;
+}
+
+.wx_input .weui-input::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    font-size: 24rpx;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: rgba(169, 169, 169, 1);
+    line-height: 34rpx;
+
+}
+
+.wx_input .weui-input::-moz-placeholder {
+    /* Firefox 19+ */
+    font-size: 24rpx;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: rgba(169, 169, 169, 1);
+    line-height: 34rpx;
+}
+
+.wx_input .weui-input:-ms-input-placeholder {
+    /* IE 10+ */
+    font-size: 24rpx;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: rgba(169, 169, 169, 1);
+    line-height: 34rpx;
+}
+
+.wx_input .weui-input:-moz-placeholder {
+    /* Firefox 18- */
+    font-size: 24rpx;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: rgba(169, 169, 169, 1);
+    line-height: 34rpx;
+}
+
+.wx_btn > view{
+    display: inline-block;
+    width:210rpx;
+    height:44rpx;
+    font-size:32rpx;
+    font-family:PingFangSC-Regular,PingFang SC;
+    font-weight:400;
+    color:rgba(153,153,153,1);
+    line-height:44rpx;
+    text-align: center;
+}
+
+.wx_btn .wx_btn_sure{
+    color:rgba(30,175,1,1);
+    margin-left: 60rpx;
+}

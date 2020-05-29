@@ -1,0 +1,26 @@
+.login-input{
+  height: 44rpx;
+  border-bottom: 2rpx solid #E6E6E6; /*no*/
+  padding: 20rpx 20rpx 20rpx 0;
+  margin-top: 12rpx;
+}
+.login-input > view {
+  width: 230rpx;
+}
+.img-b{
+  width: 312rpx;
+  height: 132rpx;
+}
+.item_h {
+  margin-top: 30rpx;
+  width: 78%;
+  line-height: 34rpx;
+}
+.horizontal{
+  border-bottom: 2rpx solid #999999; /*no*/
+}
+.login {
+  margin-top: 116rpx;
+  height: 92rpx;
+  border-radius: 46rpx;
+}

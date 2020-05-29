@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "scroll": "../../../dist/scroll/index"
+  },
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "订单管理"
+}

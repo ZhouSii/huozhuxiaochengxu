@@ -1,0 +1,38 @@
+<template name="addressDetailWindow">
+  <view class='mask flex' wx:if="{{showWindow}}">
+    <form bindsubmit="formSubmit" class='window p_r'>
+      <view class='f-36 c-3 flex margin_t_40'>{{addr[i].shipperSort === 0 ? '发' : '收'}}货人信息</view>
+      <view class='f-28 f_g margin_t_20 margin_b_20'>{{addr[i].shipperSort === 0 ? '发' : '收'}}货人列表</view>
+      <view class='flex_sb item' data-item='{{addr[i]}}' bindtap='toShowMap'>
+        <view class='flex_a'>
+          <image mode='aspectFit' wx:if='{{addr[i].shipperSort === 0}}' src='../../images/fa@2x.png' style='width:32rpx;height:38rpx'></image>
+          <image mode='aspectFit' wx:else src='../../images/suo@2x.png' style='width:32rpx;height:38rpx'></image>
+          <text class='c-3 f-28 margin_l_20'>{{addr[i].originName}}</text>
+        </view>
+        <i-icon data-dir="right" type="enter" size="16" />
+      </view>
+
+      <view class='flex_a item'>
+        <image mode='aspectFit' src='../../images/loudong@2x.png' style='width:28rpx;height:26rpx'></image>
+        <input value="{{addr[i].addressDetail}}" class="c-3 f-28 margin_l_20 flex_1" placeholder="详细地址如门牌号（可不填）" name="checkAddressNo"></input>
+      </view>
+      <view class='flex_a item'>
+        <image mode='aspectFit' src='../../images/ren@2x.png' style='width:28rpx;height:28rpx'></image>
+        <input value="{{addr[i].consignee}}" class="c-3 f-28 margin_l_20 flex_1" placeholder="{{addr[i].shipperSort === 0 ? '发' : '收'}}货人姓名（可不填）" name="checkConsignee"></input>
+      </view>
+      <view class='flex_a item'>
+        <image mode='aspectFit' src='../../images/shouji@2x.png' style='width:22rpx;height:28rpx'></image>
+        <input value="{{addr[i].consigneeMobile}}" type="number" maxlength="11" class="c-3 f-28 margin_l_20 flex_1" placeholder="联系人电话（{{checkedSms?'必':'可不'}}填）" name="checkConsigneeMobile"></input>
+      </view>
+
+      <view style='height:80rpx' bindtap='smsHandle' wx:if="{{showSms}}">
+        <image mode='aspectFit' src='../../images/dui41@2x.png' wx:if="{{checkedSms}}" style='width:24rpx;height:24rpx'></image>
+        <image mode='aspectFit' src='../../images/dui4@2x.png' wx:else style='width:24rpx;height:24rpx'></image>
+        <text class='c-9 f-28 margin_l_20'>短信验证码签收</text>
+      </view>
+
+      <button form-type="submit" class='button flex f_w f-36'>确定</button>
+      <image class='close' bindtap='closeWindow' mode='aspectFit' src='../../images/Combined_Shape@2x.png'></image>
+    </form>
+  </view>
+</template>

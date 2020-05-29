@@ -1,0 +1,201 @@
+.pay-button{
+  height: 92rpx;
+  background:linear-gradient(90deg,rgba(65,191,14,1) 0%,rgba(30,175,1,1) 100%);
+  box-shadow:0 4rpx 12rpx 0 rgba(30,175,1,0.3);
+  border-radius: 46rpx;
+}
+.module_bottom {
+  background:rgba(255,255,255,1);
+  border-radius: 24rpx 24rpx 0 0;
+  box-sizing: border-box;
+}
+
+.module_bottom .top {
+  height: 128rpx;
+  padding: 0 30rpx;
+}
+
+.module_bottom .info {
+  color: #AE841D;
+  margin-bottom: 60rpx;
+  padding: 0 30rpx;
+  line-height: 32rpx;
+}
+.module_bottom .cny {
+  width: 28rpx;
+  height: 30rpx;
+  margin-right: 10rpx;
+}
+.info-item{
+  height: 60rpx;
+  font-size: 24rpx;
+  padding: 0 30rpx;
+}
+.one_line {
+  width: 370rpx;
+  display: inline-block;
+  text-align: end;
+}
+.one_line1{
+  width: 340rpx;
+  display: inline-block;
+  text-align: end;
+}
+.goods-button{
+  width: 25%;
+}
+.goods-button-item-selected {
+  width:128rpx;
+  height:48rpx;
+  background:rgba(232,247,229,1);
+  border-radius:24rpx;
+  border:2rpx solid rgba(30,175,1,0.6);
+  box-sizing: border-box;
+  margin-bottom: 16rpx;
+}
+.goods-button-item{
+  width:128rpx;
+  height:48rpx;
+  background:rgba(242,242,242,1);
+  border-radius:24rpx;
+  margin-bottom: 16rpx;
+}
+  .tip-button-selected {
+    width:140rpx;
+    height:48rpx;
+    background:rgba(232,247,229,1);
+    border-radius:24rpx;
+    border:2rpx solid rgba(30,175,1,0.6);
+    box-sizing: border-box;
+  }
+
+  .tip-button{
+    width: 140rpx;
+    height:48rpx;
+    background:rgba(242,242,242,1);
+    border-radius:24rpx;
+  }
+  .tip-input{
+    height: 60rpx;
+    border-radius: 10rpx;
+    background-color: #EEEEEE;
+  }
+  .submit_h{
+    height: 80rpx;
+  }
+  .submit_cancel{
+    border-right: 2rpx solid #DCDBDC;
+  }  
+  
+  .button_g {
+    height: 92rpx;
+    background:linear-gradient(90deg,rgba(65,191,14,1) 0%,rgba(30,175,1,1) 100%);
+    box-shadow:0 4rpx 12rpx 0 rgba(30,175,1,0.3);
+    border-radius: 46rpx;
+    margin: 30rpx;
+  }
+.common_module_top {
+      height: 128rpx;
+      padding: 0 30rpx;
+    }
+    .common_module_item {
+      min-height: 100rpx;
+      padding: 20rpx 30rpx;
+      box-sizing: border-box;
+    }
+    .common_module_item .img {
+      max-width: 32rpx;
+      height: 32rpx;
+    }
+    .common_module_item .ddqr_paynow{
+      width: 40rpx;
+      height: 40rpx;
+    }
+    .divide {
+      border-bottom: 2rpx solid #E6E6E6; /*no*/
+    }
+  .common_module {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 15;
+    background:rgba(255,255,255,1);
+    border-radius:24rpx 24rpx 0 0;
+    box-sizing: border-box;
+  }
+  .mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 12;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+  }
+  .mask2{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 13;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+  }
+  .mask2-window{
+    background-color: white;
+    border-radius: 20rpx;
+    position: fixed;
+    z-index: 16;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    width: 80%;
+  }
+  .tip-input{
+    height: 60rpx;
+    border-radius: 10rpx;
+    background-color: #EEEEEE;
+  }
+.footer{
+  height: 132rpx;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+}
+.footer .footer-right{
+  width: 268rpx;
+  height: 92rpx;
+  background: linear-gradient(90deg,rgba(65,191,14,1) 0%,rgba(30,175,1,1) 100%);
+  box-shadow:0 4rpx 12rpx 0 rgba(30,175,1,0.3);
+  border-radius: 46rpx;
+}
+.discount {
+  padding: 0 30rpx;
+  height: 60rpx;
+  background:rgba(255,248,244,1);
+  box-shadow: 0 -4rpx 20rpx 0 rgba(0,0,0,0.05);
+}
+.margin_l_2 {
+  margin-left: 4rpx;
+}
+.order-next{
+  background:rgba(255,255,255,1);
+  box-shadow:0 4rpx 20rpx 0 rgba(0,0,0,0.05);
+  border-radius: 16rpx;
+}
+.order-item{
+  height: 100rpx;
+  padding: 0 30rpx;
+}
+.order-item .img{
+  height: 32rpx;
+  width: 32rpx;
+}
+.order-next-top {
+  height: 44rpx;
+  background:rgba(253,249,220,1);
+  padding: 0 30rpx;
+}
+page {
+  height: 100%;
+}

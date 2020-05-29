@@ -1,0 +1,49 @@
+<view class="flex_f height_100">
+  <view class="search b_b flex_a">
+    <view class="search-body flex_1 flex_a">
+      <i-icon class="margin_l_20 margin_r_20 flex" type="search" size="20" />
+      <input type="text" class="my-input" placeholder="请输入城市名字" bindfocus="searchFocus" bindinput="searchChange"></input>
+    </view>
+    <view class="c-9 f-32 margin_r_20" bindtap='clickCancle' wx:if="{{showSearchButton}}">
+      取消
+    </view>
+  </view>
+  <view class="flex_1 o_f" wx:if="{{showSearchButton}}" bindtap='clickCancle'>
+    <view wx:for="{{showSearchList}}" wx:key="{{index}}">
+      <view class="b_b padding_20 f-32" data-item='{{item}}' catchtap="selectCity">
+      <navigator url="">
+        {{item.name}}
+        </navigator>
+      </view>
+    </view>
+    <text wx:if="{{showSearchList.length===0 && searchValue !== ''}}" class="flex_j margin_t_40">没有搜索到相关城市</text>
+  </view>
+  <view class="padding_20_40 f-28" wx:if="{{!showSearchButton}}">
+    <view data-code='{{showCityAdcodeFirst[1]}}' bindtap="backIndex">
+     <navigator url="">
+      定位城市：{{showCityAdcodeFirst[0]}}
+      </navigator>
+    </view>
+  </view>
+
+  <view wx:if="{{cityHistoryList.length > 0 && !showSearchButton}}">
+    <view class="cube-index-list-anchor">
+      历史访问城市
+    </view>
+    <view class="flex_a city-history">
+      <view class="flex city-button" wx:for="{{cityHistoryList}}" wx:key="{{index}}" data-item='{{item}}' bindtap="selectCity">
+       <navigator url="" class="b_c_w ">{{item.name}} </navigator>
+      </view>
+    </view>
+  </view>
+
+  <view class="flex_1 o_f" wx:if="{{!showSearchButton}}">
+    <i-index height="100%" bind:change="onChange">
+      <i-index-item wx:for="{{ cityData }}" wx:for-index="index" wx:key="{{index}}" wx:for-item="item" name="{{item.pinyin}}">
+        <view class="i-index-demo-item" wx:for="{{item.cities}}" wx:for-index="in" wx:key="{{in}}" wx:for-item="it" data-item='{{it}}' bindtap="selectCity">
+          <navigator url="">{{it.name}}</navigator>
+        </view>
+      </i-index-item>
+    </i-index>
+  </view>
+</view>

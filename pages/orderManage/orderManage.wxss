@@ -1,0 +1,75 @@
+.h3_mg30 {
+  margin-top: 60rpx;
+}
+
+.h3_mg50 {
+  margin-top: 100rpx;
+}
+
+.indent_h3 {
+  line-height: 60rpx;
+  font-size: 40rpx;
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 2rpx;
+}
+
+.h3_color {
+  color: #f13300;
+  font-weight: bold;
+}
+
+.ImgBox {
+  width: 100%;
+  text-align: center;
+  margin-top: 100rpx;
+}
+
+.ImgBox image {
+  width: 550rpx;
+  height: 333rpx
+}
+
+.indent_h2 {
+  font-size: 56rpx;
+  font-weight: bold;
+  color: #2ccd83;
+  margin-top: 60rpx;
+}
+
+.indent_h4 {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #2ccd83;
+  line-height: 80rpx;
+}
+
+.footer_btn {
+  padding: 20rpx;
+  border-radius: 100rpx;
+  color: #fff;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70%;
+  margin: 0px auto;
+}
+
+.footer_btn image {
+  width: 32rpx;
+  height: 36rpx;
+  margin-right: 10rpx;
+}
+
+.urlCss {
+  color: #fff;
+}
+
+.btn1_color {
+  background: #323232;
+}
+
+.btn2_color {
+  background: #2ccd83;
+}

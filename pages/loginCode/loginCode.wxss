@@ -1,0 +1,22 @@
+.login-input {
+  height: 44rpx;
+  border: 2rpx solid #c0c4cc;
+  border-radius: 10rpx;
+  padding: 20rpx;
+  margin-top: 12rpx;
+}
+
+.input-box {
+  font-size: 24rpx;
+}
+
+.get-code {
+  border-radius: 10rpx;
+  width: 140rpx;
+  height: 48rpx;
+}
+.button-g {
+    height: 96rpx;
+    border-radius: 10rpx;
+    background-color: #2fb301;
+}

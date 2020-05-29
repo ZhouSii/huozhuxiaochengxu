@@ -1,0 +1,22 @@
+<view class="height_100 flex_f p_r">
+  <view class="flex_1">
+
+    <view class="flex_sb item b_c_w b_b">
+      <view class="f-28 c-3">当前版本</view>
+      <view class="f-28 c-9">1.0</view>
+    </view>
+
+  </view>
+  <view class="success " bindtap="loginOut">
+  <navigator url="">
+    <view class="success-button  flex f_w">
+      退出登录
+    </view>
+    </navigator>
+  </view>
+  <i-action-sheet visible="{{ visible2 }}" actions="{{ actions2 }}" show-cancel bind:cancel="handleCancel2" bind:click="handleClickItem2">
+    <view slot="header" style="padding: 16px">
+      <view style="color: #444;font-size: 16px">确定要退出登录吗？</view>
+    </view>
+</i-action-sheet>
+</view>

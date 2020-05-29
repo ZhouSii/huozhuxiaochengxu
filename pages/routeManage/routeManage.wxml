@@ -1,0 +1,42 @@
+  <view class="height_100 flex_f">
+    <view class='margin_b_20 padding_l_20 padding_r_20'>
+      <view class="f-24 c-9 flex_ce" bindtap='showEdit'>{{!showEdit?'管理':'完成'}}</view>
+    </view>
+
+    <view class="flex_1 b_f5 o_f wk-touch">
+      <view wx:if='{{tableData.length === 0}}' class='flex flex_f'>
+        <image mode='aspectFit' src='../../images/changyonglx_null@2x.png' class='map_img'></image>
+        <text class='c-9 f-40 margin_t_20'>暂无常用路线</text>
+        <text class='c-9 f-20' style='margin-top:10rpx'>赶紧在订单详情中收藏或则会添加一个吧</text>
+      </view>
+      <view class="addressTopDivRoute margin_b_20" wx:for="{{tableData}}" wx:key="{{index}}">
+        <view class="c-3 f-24">{{item[0].lineName}}</view>
+        <view class="flex_a" wx:for="{{item}}" wx:for-item="item1" wx:for-index="index1" wx:key="{{index1}}" data-item='{{item}}' bindtap="toOrder">
+          <view class="dotContRoute flex p_r" >
+            <view class="{{(index1===0)?'greendot':''}} {{(index1 + 1 ===  item.length)?'reddot':''}} {{(index1 > 0 && index1 + 1 !== item.length)?'graydot':''}}"></view>
+            <view wx:if="{{index1 !== 0}}" class="line"></view>
+          </view>
+
+          <view class="flex_1 line-item flex_a">
+            <view >
+              <view class="addressDetail c-3 f-28">{{item1.name}}</view>
+              <view class="addressDetail c-9 f-24">{{item1.address}}</view>
+            </view>
+          </view>
+        </view>
+        <view class="flex_ce" wx:if="{{showEdit}}">
+          <view class="f-24 c-9 margin_r_20" data-item='{{item}}' bindtap="del">删除</view>
+          <view class="f-24 f_b margin_l_40" data-item='{{item}}' bindtap="edit">编辑</view>
+        </view>
+      </view>
+
+      <view class="_h"></view>
+
+      <view class="white " bindtap="addSubmit">
+        <view class="white-button flex f-32">
+          + 添加一个新路线
+        </view>
+      </view>
+    </view>
+
+  </view>

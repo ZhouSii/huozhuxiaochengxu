@@ -1,0 +1,42 @@
+textarea{
+    width: 100%;
+    border: none;
+    background-color: #f5f5f5;
+  }
+
+  textarea + view{
+    position: absolute;
+    right: 10rpx;
+    bottom: 16rpx;
+  }
+  .goods-button{
+    width: 20%;
+  }
+
+  .goods-button .goods-button-item{
+    border-radius: 10rpx;
+    border: 2rpx solid #DCDBDC;
+    width: 80%;
+    height: 60rpx;
+    margin-bottom: 16rpx;
+  }
+  .divide{
+    height: 2rpx;
+    width: 200rpx;
+    background-color: #999999;
+  }
+  .remark-item{
+    height: 70rpx;
+    margin-bottom: 10rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
+    line-height: 70rpx;
+  }
+  .remark-selected{
+    border: 2rpx #333333 solid;
+  }
+  .remark-noselected{
+    border: 2rpx #999999 solid;
+  }
